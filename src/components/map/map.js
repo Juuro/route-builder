@@ -4,12 +4,14 @@ import Leaflet from 'leaflet'
 
 import './map.css'
 
-const Map = () => {
+const Map = (props) => {
   let map = useRef(null)
-  let pLineGroup = Leaflet.layerGroup()
+  let pLineGroup = useRef(Leaflet.layerGroup())
+  let markers = []
+  let coordinates = useRef([])
 
-  const [coordinates, setCoordinates] = useState([])
-  const [markers, setMarkers] = useState([])
+  //const [coordinates, setCoordinates] = useState([])
+  //const [markers, setMarkers] = useState([])
   const [text, setText] = useState('')
 
   useEffect(() => {
@@ -32,42 +34,47 @@ const Map = () => {
     map.current.on('click', onMapClick)
   }, [])
 
-  // useEffect(() => {
-  //   console.log('hio', coordinates)
-  //   pLineGroup.addLayer(
-  //     Leaflet.polyline(coordinates, { color: '#4085E1', weight: 8 })
-  //   )
-  //   pLineGroup.addTo(map.current)
-  // }, [coordinates, pLineGroup])
+  useEffect(() => {
+    console.log('useEffect', coordinates.current)
+    pLineGroup.current.addLayer(
+      Leaflet.polyline(coordinates.current, { color: '#4085E1', weight: 8 })
+    )
+    pLineGroup.current.addTo(map.current)
+  })
 
   const onMapClick = (event) => {
-    setText(...text, 'lalala')
-
-    console.log('coordinates', coordinates)
+    console.log('coordinates', coordinates.current)
+    console.log('markers', markers)
+    console.log('text', text)
 
     const marker = Leaflet.marker(event.latlng, {
       draggable: true,
       icon: Leaflet.divIcon({
-        html: coordinates.length + 1,
+        html: markers.length + 1,
         className: 'marker-text',
       }),
     }).addTo(map.current)
     marker.on('move', onMarkerMove)
 
-    setCoordinates((coordinates) => [
-      ...coordinates,
-      [event.latlng.lat, event.latlng.lng],
-    ])
-    setMarkers([...markers, marker])
+    // setCoordinates((coordinates) => [
+    //   ...coordinates,
+    //   [event.latlng.lat, event.latlng.lng],
+    // ])
+    //setMarkers([...markers, marker])
+    coordinates.current.push([event.latlng.lat, event.latlng.lng])
+    markers.push(marker)
+    setText(coordinates.current.length)
   }
 
   const onMarkerMove = (event) => {
     setText([])
-    setCoordinates([])
-    setMarkers([])
-    console.log('onMarkerMove – coordinates', coordinates)
+    // setCoordinates([])
+    //setMarkers([])
+    markers = []
+    coordinates.current = []
+    console.log('onMarkerMove – coordinates', coordinates.current)
     console.log('onMarkerMove – text', text)
-    pLineGroup.removeFrom(map.current)
+    pLineGroup.current.removeFrom(map.current)
   }
 
   return (
