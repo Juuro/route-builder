@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import 'leaflet/dist/leaflet.css'
 import Leaflet from 'leaflet'
 
@@ -6,14 +6,32 @@ import './map.css'
 
 const Map = () => {
   let map = useRef(null)
-  let pLineGroup = Leaflet.layerGroup()
+  let markers = []
+  let path = useRef({})
 
   const [coordinates, setCoordinates] = useState([])
-  const [markers, setMarkers] = useState([])
-  const [text, setText] = useState('')
+
+  const onMapClick = (event) => {
+    const marker = Leaflet.marker(event.latlng, {
+      draggable: true,
+      icon: Leaflet.divIcon({
+        html: markers.length + 1,
+        className: 'marker-text',
+      }),
+    }).addTo(map.current)
+    marker.on('move', onMarkerMove)
+
+    markers.push(marker)
+    setCoordinates((coordinates) => [
+      ...coordinates,
+      [event.latlng.lat, event.latlng.lng],
+    ])
+  }
+
+  const stableOnMapClick = useCallback(onMapClick, [])
 
   useEffect(() => {
-    map.current = Leaflet.map('mapid').setView([51.505, -0.09], 13)
+    map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
 
     Leaflet.tileLayer(
       'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
@@ -29,45 +47,27 @@ const Map = () => {
       }
     ).addTo(map.current)
 
-    map.current.on('click', onMapClick)
-  }, [])
+    map.current.on('click', stableOnMapClick)
+  }, [stableOnMapClick])
 
-  // useEffect(() => {
-  //   console.log('hio', coordinates)
-  //   pLineGroup.addLayer(
-  //     Leaflet.polyline(coordinates, { color: '#4085E1', weight: 8 })
-  //   )
-  //   pLineGroup.addTo(map.current)
-  // }, [coordinates, pLineGroup])
+  useEffect(() => {
+    map.current.removeLayer(path.current)
 
-  const onMapClick = (event) => {
-    setText(...text, 'lalala')
-
-    console.log('coordinates', coordinates)
-
-    const marker = Leaflet.marker(event.latlng, {
-      draggable: true,
-      icon: Leaflet.divIcon({
-        html: coordinates.length + 1,
-        className: 'marker-text',
-      }),
+    path.current = Leaflet.polyline(coordinates, {
+      color: '#4085E1',
+      weight: 8,
     }).addTo(map.current)
-    marker.on('move', onMarkerMove)
+  }, [coordinates])
 
-    setCoordinates((coordinates) => [
-      ...coordinates,
-      [event.latlng.lat, event.latlng.lng],
-    ])
-    setMarkers([...markers, marker])
-  }
+  const onMarkerMove = () => {
+    map.current.removeLayer(path.current)
 
-  const onMarkerMove = (event) => {
-    setText([])
-    setCoordinates([])
-    setMarkers([])
-    console.log('onMarkerMove – coordinates', coordinates)
-    console.log('onMarkerMove – text', text)
-    pLineGroup.removeFrom(map.current)
+    let newCoordinates = []
+    markers.forEach((marker) => {
+      const latlng = marker.getLatLng()
+      newCoordinates.push([latlng.lat, latlng.lng])
+    })
+    setCoordinates(newCoordinates)
   }
 
   return (
