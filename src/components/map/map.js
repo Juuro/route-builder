@@ -4,7 +4,7 @@ import Leaflet from 'leaflet'
 
 import './map.css'
 
-const Map = (props) => {
+const Map = () => {
   let map = useRef(null)
   let markers = []
   let path = useRef({})
@@ -53,7 +53,7 @@ const Map = (props) => {
     setCoordinates(coordinates => [...coordinates, [event.latlng.lat, event.latlng.lng]])
   }
 
-  const onMarkerMove = (event) => {
+  const onMarkerMove = () => {
     map.current.removeLayer(path.current)
 
     let newCoordinates = []
