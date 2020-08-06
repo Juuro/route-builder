@@ -7,10 +7,9 @@ import './map.css'
 const Map = (props) => {
   let map = useRef(null)
   let markers = []
-  let coordinates = useRef([])
   let path = useRef({})
 
-  const [coords, setCoords] = useState([])
+  const [coordinates, setCoordinates] = useState([])
 
   useEffect(() => {
     map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
@@ -33,11 +32,11 @@ const Map = (props) => {
   }, [])
 
   useEffect(() => {
-    console.log('useEffect', coords)
+    console.log('useEffect', coordinates)
     map.current.removeLayer(path.current)
     
-    path.current = Leaflet.polyline(coords, { color: '#4085E1', weight: 8 }).addTo(map.current)
-  })
+    path.current = Leaflet.polyline(coordinates, { color: '#4085E1', weight: 8 }).addTo(map.current)
+  }, [coordinates])
 
   const onMapClick = (event) => {
 
@@ -50,22 +49,19 @@ const Map = (props) => {
     }).addTo(map.current)
     marker.on('move', onMarkerMove)
 
-    coordinates.current.push([event.latlng.lat, event.latlng.lng])
     markers.push(marker)
-    setCoords(coords => [...coords, [event.latlng.lat, event.latlng.lng]])
+    setCoordinates(coordinates => [...coordinates, [event.latlng.lat, event.latlng.lng]])
   }
 
   const onMarkerMove = (event) => {
-    setCoords([])
-    coordinates.current = []
     map.current.removeLayer(path.current)
 
-    let cordelz = []
+    let newCoordinates = []
     markers.forEach(marker => {
       const latlng = marker.getLatLng()
-      cordelz.push([latlng.lat, latlng.lng])
+      newCoordinates.push([latlng.lat, latlng.lng])
     })
-    setCoords(cordelz)
+    setCoordinates(newCoordinates)
   }
 
   return (
