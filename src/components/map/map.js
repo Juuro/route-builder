@@ -6,7 +6,6 @@ import './map.css'
 
 const Map = (props) => {
   let map = useRef(null)
-  let pLineGroup = useRef(Leaflet.layerGroup())
   let markers = []
   let coordinates = useRef([])
   let path = useRef({})
@@ -16,7 +15,7 @@ const Map = (props) => {
   const [text, setText] = useState('')
 
   useEffect(() => {
-    map.current = Leaflet.map('mapid').setView([51.505, -0.09], 13)
+    map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
 
     Leaflet.tileLayer(
       'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
@@ -76,6 +75,10 @@ const Map = (props) => {
     console.log('onMarkerMove – text', text)
     map.current.removeLayer(path.current)
 
+    markers.forEach(marker => {
+      const latlng = marker.getLatLng()
+      coordinates.current.push([latlng.lat, latlng.lng])
+    })
   }
 
   return (
