@@ -8,6 +8,6 @@
   .sidebar {
     flex: 0 0 388px;
     max-width: 388px;
-    height: 100vh;
+    max-height: 100vh;
   }
 }

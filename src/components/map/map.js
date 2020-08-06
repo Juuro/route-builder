@@ -51,7 +51,6 @@ const Map = () => {
   }, [stableOnMapClick])
 
   useEffect(() => {
-    console.log('useEffect', coordinates)
     map.current.removeLayer(path.current)
 
     path.current = Leaflet.polyline(coordinates, {
