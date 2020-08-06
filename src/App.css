@@ -1,0 +1,30 @@
+:root {
+  --almost-black: #383838;
+  --blue: #4085E1;
+}
+
+body {
+  color: #fff;
+  height: 100vh;
+  font-size: 16px;
+}
+
+
+.mapid {
+  width: 600px;
+  height: 400px;
+  position: relative;
+  outline: none;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+@media (min-width: 548px) {
+  main {
+    flex-direction: row;
+  }
+}

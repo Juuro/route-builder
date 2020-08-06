@@ -1,0 +1,13 @@
+.sidebar {
+  width: auto;
+  padding: 1rem;
+  background-color: var(--almost-black);
+}
+
+@media (min-width: 548px) {
+  .sidebar {
+    flex: 0 0 388px;
+    max-width: 388px;
+    height: 100vh;
+  }
+}
