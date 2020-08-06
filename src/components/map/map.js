@@ -9,6 +9,7 @@ const Map = (props) => {
   let pLineGroup = useRef(Leaflet.layerGroup())
   let markers = []
   let coordinates = useRef([])
+  let path = useRef({})
 
   //const [coordinates, setCoordinates] = useState([])
   //const [markers, setMarkers] = useState([])
@@ -36,10 +37,9 @@ const Map = (props) => {
 
   useEffect(() => {
     console.log('useEffect', coordinates.current)
-    pLineGroup.current.addLayer(
-      Leaflet.polyline(coordinates.current, { color: '#4085E1', weight: 8 })
-    )
-    pLineGroup.current.addTo(map.current)
+    map.current.removeLayer(path.current)
+    
+    path.current = Leaflet.polyline(coordinates.current, { color: '#4085E1', weight: 8 }).addTo(map.current)
   })
 
   const onMapClick = (event) => {
@@ -69,12 +69,13 @@ const Map = (props) => {
   const onMarkerMove = (event) => {
     setText([])
     // setCoordinates([])
-    //setMarkers([])
-    markers = []
+    // setMarkers([])
+    // markers = []
     coordinates.current = []
     console.log('onMarkerMove – coordinates', coordinates.current)
     console.log('onMarkerMove – text', text)
-    pLineGroup.current.removeFrom(map.current)
+    map.current.removeLayer(path.current)
+
   }
 
   return (
