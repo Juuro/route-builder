@@ -10,9 +10,7 @@ const Map = (props) => {
   let coordinates = useRef([])
   let path = useRef({})
 
-  //const [coordinates, setCoordinates] = useState([])
-  //const [markers, setMarkers] = useState([])
-  const [text, setText] = useState('')
+  const [coords, setCoords] = useState([])
 
   useEffect(() => {
     map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
@@ -35,16 +33,13 @@ const Map = (props) => {
   }, [])
 
   useEffect(() => {
-    console.log('useEffect', coordinates.current)
+    console.log('useEffect', coords)
     map.current.removeLayer(path.current)
     
-    path.current = Leaflet.polyline(coordinates.current, { color: '#4085E1', weight: 8 }).addTo(map.current)
+    path.current = Leaflet.polyline(coords, { color: '#4085E1', weight: 8 }).addTo(map.current)
   })
 
   const onMapClick = (event) => {
-    console.log('coordinates', coordinates.current)
-    console.log('markers', markers)
-    console.log('text', text)
 
     const marker = Leaflet.marker(event.latlng, {
       draggable: true,
@@ -55,30 +50,22 @@ const Map = (props) => {
     }).addTo(map.current)
     marker.on('move', onMarkerMove)
 
-    // setCoordinates((coordinates) => [
-    //   ...coordinates,
-    //   [event.latlng.lat, event.latlng.lng],
-    // ])
-    //setMarkers([...markers, marker])
     coordinates.current.push([event.latlng.lat, event.latlng.lng])
     markers.push(marker)
-    setText(coordinates.current.length)
+    setCoords(coords => [...coords, [event.latlng.lat, event.latlng.lng]])
   }
 
   const onMarkerMove = (event) => {
-    setText([])
-    // setCoordinates([])
-    // setMarkers([])
-    // markers = []
+    setCoords([])
     coordinates.current = []
-    console.log('onMarkerMove – coordinates', coordinates.current)
-    console.log('onMarkerMove – text', text)
     map.current.removeLayer(path.current)
 
+    let cordelz = []
     markers.forEach(marker => {
       const latlng = marker.getLatLng()
-      coordinates.current.push([latlng.lat, latlng.lng])
+      cordelz.push([latlng.lat, latlng.lng])
     })
+    setCoords(cordelz)
   }
 
   return (
