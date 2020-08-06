@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import 'leaflet/dist/leaflet.css'
 import Leaflet from 'leaflet'
 
@@ -10,6 +10,25 @@ const Map = () => {
   let path = useRef({})
 
   const [coordinates, setCoordinates] = useState([])
+
+  const onMapClick = (event) => {
+    const marker = Leaflet.marker(event.latlng, {
+      draggable: true,
+      icon: Leaflet.divIcon({
+        html: markers.length + 1,
+        className: 'marker-text',
+      }),
+    }).addTo(map.current)
+    marker.on('move', onMarkerMove)
+
+    markers.push(marker)
+    setCoordinates((coordinates) => [
+      ...coordinates,
+      [event.latlng.lat, event.latlng.lng],
+    ])
+  }
+
+  const stableOnMapClick = useCallback(onMapClick, [])
 
   useEffect(() => {
     map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
@@ -28,36 +47,24 @@ const Map = () => {
       }
     ).addTo(map.current)
 
-    map.current.on('click', onMapClick)
-  }, [])
+    map.current.on('click', stableOnMapClick)
+  }, [stableOnMapClick])
 
   useEffect(() => {
     console.log('useEffect', coordinates)
     map.current.removeLayer(path.current)
-    
-    path.current = Leaflet.polyline(coordinates, { color: '#4085E1', weight: 8 }).addTo(map.current)
-  }, [coordinates])
 
-  const onMapClick = (event) => {
-
-    const marker = Leaflet.marker(event.latlng, {
-      draggable: true,
-      icon: Leaflet.divIcon({
-        html: markers.length + 1,
-        className: 'marker-text',
-      }),
+    path.current = Leaflet.polyline(coordinates, {
+      color: '#4085E1',
+      weight: 8,
     }).addTo(map.current)
-    marker.on('move', onMarkerMove)
-
-    markers.push(marker)
-    setCoordinates(coordinates => [...coordinates, [event.latlng.lat, event.latlng.lng]])
-  }
+  }, [coordinates])
 
   const onMarkerMove = () => {
     map.current.removeLayer(path.current)
 
     let newCoordinates = []
-    markers.forEach(marker => {
+    markers.forEach((marker) => {
       const latlng = marker.getLatLng()
       newCoordinates.push([latlng.lat, latlng.lng])
     })
