@@ -44,6 +44,8 @@
     ]
   },
   "devDependencies": {
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-security": "^1.4.0",
     "node-sass": "^4.14.1"
   },
   "jest": {
