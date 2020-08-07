@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ReactComponent as DeleteIcon } from './delete.svg'
 
-import './waypoint.css'
+import './waypoint.scss'
 
 const Waypoint = ({ waypoint, moveWaypoint, setDragElement, id }) => {
   const removeWaypoint = (event) => {
