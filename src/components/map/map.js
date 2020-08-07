@@ -11,7 +11,18 @@ const Map = () => {
 
   const [coordinates, setCoordinates] = useState([])
 
-  const onMapClick = (event) => {
+  const onMarkerMove = useCallback(() => {
+    map.current.removeLayer(path.current)
+
+    let newCoordinates = []
+    markers.forEach((marker) => {
+      const latlng = marker.getLatLng()
+      newCoordinates.push([latlng.lat, latlng.lng])
+    })
+    setCoordinates(newCoordinates)
+  }, [markers])
+
+  const onMapClick = useCallback((event) => {
     const marker = Leaflet.marker(event.latlng, {
       draggable: true,
       icon: Leaflet.divIcon({
@@ -26,29 +37,30 @@ const Map = () => {
       ...coordinates,
       [event.latlng.lat, event.latlng.lng],
     ])
-  }
+  }, [markers, onMarkerMove])
 
-  const stableOnMapClick = useCallback(onMapClick, [])
+  useEffect(() => { 
+    if (!map.current) {
+      map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
 
-  useEffect(() => {
-    map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
+      Leaflet.tileLayer(
+        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+        {
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox/outdoors-v11',
+          tileSize: 512,
+          zoomOffset: -1,
+          accessToken:
+            'pk.eyJ1IjoianV1cm8iLCJhIjoiY2tkaGdoNzk0MDJ1YTJzb2V4anZ3NXk4bSJ9.1m7LQQaTf2W4R-IgKKGZCQ',
+        }
+      ).addTo(map.current)
+  
+      map.current.on('click', onMapClick)
+    }
 
-    Leaflet.tileLayer(
-      'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
-      {
-        attribution:
-          'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox/outdoors-v11',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken:
-          'pk.eyJ1IjoianV1cm8iLCJhIjoiY2tkaGdoNzk0MDJ1YTJzb2V4anZ3NXk4bSJ9.1m7LQQaTf2W4R-IgKKGZCQ',
-      }
-    ).addTo(map.current)
-
-    map.current.on('click', stableOnMapClick)
-  }, [stableOnMapClick])
+  }, [onMapClick])
 
   useEffect(() => {
     map.current.removeLayer(path.current)
@@ -58,17 +70,6 @@ const Map = () => {
       weight: 8,
     }).addTo(map.current)
   }, [coordinates])
-
-  const onMarkerMove = () => {
-    map.current.removeLayer(path.current)
-
-    let newCoordinates = []
-    markers.forEach((marker) => {
-      const latlng = marker.getLatLng()
-      newCoordinates.push([latlng.lat, latlng.lng])
-    })
-    setCoordinates(newCoordinates)
-  }
 
   return (
     <>
