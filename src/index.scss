@@ -1,6 +1,5 @@
-$blubb: #fff;
-
 :root {
+    // stylelint-disable color-no-hex
     --white: #fff;
     --almost-black: #383838;
     --black: #000;
@@ -8,6 +7,7 @@ $blubb: #fff;
     --gray: #747474;
     --green: #cae26a;
     --green-hover: #6b9237;
+    // stylelint-enable
 }
 
 body {
