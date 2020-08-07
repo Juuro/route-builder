@@ -6,38 +6,23 @@ import './map.css'
 
 const Map = () => {
   let map = useRef(null)
-  let markers = []
   let path = useRef({})
 
-  const [coordinates, setCoordinates] = useState([])
+  const [markers, setMarkers] = useState([])
+  const [newMarker, setNewMarker] = useState(null)
+  const [newMarkerPosition, setNewMarkerPosition] = useState(null)
 
-  const onMarkerMove = useCallback(() => {
-    map.current.removeLayer(path.current)
-
-    let newCoordinates = []
-    markers.forEach((marker) => {
-      const latlng = marker.getLatLng()
-      newCoordinates.push([latlng.lat, latlng.lng])
-    })
-    setCoordinates(newCoordinates)
-  }, [markers])
+  const onMarkerMove = useCallback(event => {
+    setNewMarkerPosition(event.latlng)
+  }, [])
 
   const onMapClick = useCallback((event) => {
     const marker = Leaflet.marker(event.latlng, {
       draggable: true,
-      icon: Leaflet.divIcon({
-        html: markers.length + 1,
-        className: 'marker-text',
-      }),
-    }).addTo(map.current)
-    marker.on('move', onMarkerMove)
+    }).addTo(map.current).on('move', onMarkerMove)
 
-    markers.push(marker)
-    setCoordinates((coordinates) => [
-      ...coordinates,
-      [event.latlng.lat, event.latlng.lng],
-    ])
-  }, [markers, onMarkerMove])
+    setNewMarker(marker)
+  }, [onMarkerMove])
 
   useEffect(() => { 
     if (!map.current) {
@@ -63,13 +48,31 @@ const Map = () => {
   }, [onMapClick])
 
   useEffect(() => {
+    console.log('newMarker')
+    if (newMarker) {
+      newMarker.setIcon(Leaflet.divIcon({
+        html: markers.length + 1,
+        className: 'marker-text',
+      }))
+      setMarkers((existingMarkers) => [...existingMarkers, newMarker])
+      setNewMarker(null)
+    }
+  }, [newMarker, markers])
+
+  useEffect(() => {
     map.current.removeLayer(path.current)
 
-    path.current = Leaflet.polyline(coordinates, {
+    let newCoordinates = []
+    markers.forEach((marker) => {
+      const latlng = marker.getLatLng()
+      newCoordinates.push([latlng.lat, latlng.lng])
+    })
+
+    path.current = Leaflet.polyline(newCoordinates, {
       color: '#4085E1',
       weight: 8,
     }).addTo(map.current)
-  }, [coordinates])
+  }, [markers, newMarkerPosition])
 
   return (
     <>
