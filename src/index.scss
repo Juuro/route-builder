@@ -1,0 +1,21 @@
+$blubb: #fff;
+
+:root {
+    --white: #fff;
+    --almost-black: #383838;
+    --black: #000;
+    --blue: #4085e1;
+    --gray: #747474;
+    --green: #cae26a;
+    --green-hover: #6b9237;
+}
+
+body {
+    color: var(--white);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    height: 100vh;
+    margin: 0;
+}
