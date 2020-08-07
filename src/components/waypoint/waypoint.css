@@ -1,0 +1,33 @@
+.waypoint {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 0;
+}
+
+.waypoint-drag-handle {
+  cursor: pointer;
+  padding: .25rem;
+}
+
+.waypoint-drag-handle span {
+  background-color: var(--gray);
+  display: block;
+  height: .2rem;
+  width: 1.5rem;
+  margin-bottom: .25rem;
+}
+
+.waypoint-title {
+  padding: .25rem;
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.delete-icon {
+  width: 1.5rem;
+  cursor: pointer;
+}
+
+.delete-icon path {
+  fill: var(--gray);
+}

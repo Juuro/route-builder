@@ -1,7 +1,21 @@
 .sidebar {
+  display: flex;
+  flex-direction: column;
   width: auto;
   padding: 1rem;
   background-color: var(--almost-black);
+}
+
+.waypoints {
+  flex-grow: 1;
+  margin-top: 5rem;
+}
+
+hr {
+  background-color: var(--gray);
+  border: 0;
+  height: .3rem;
+  width: 100%;
 }
 
 @media (min-width: 548px) {
