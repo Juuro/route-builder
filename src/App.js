@@ -1,6 +1,6 @@
 import React, {lazy, Suspense} from 'react'
 
-import './App.css'
+import './App.scss'
 
 const Map = lazy(() => import('./components/map/map'))
 const Sidebar = lazy(() => import('./components/sidebar/sidebar'))

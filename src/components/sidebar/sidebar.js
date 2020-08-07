@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 import Waypoint from '../waypoint/waypoint'
 
-import './sidebar.css'
+import './sidebar.scss'
 
 const Sidebar = () => {
     const [waypoints, setWaypoints] = useState([

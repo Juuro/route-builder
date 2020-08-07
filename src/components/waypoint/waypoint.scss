@@ -1,16 +1,16 @@
 .waypoint {
+    border-radius: 4px;
     display: flex;
     flex-direction: row;
-    margin: 1rem 0;
-    border-radius: 4px;
     height: 2rem;
+    margin: 1rem 0;
 
     &.dragging {
         background-color: var(--white);
 
         .waypoint-drag-handle,
         .delete-icon {
-            display: none;
+            display: none;  
         }
     }
 
@@ -22,20 +22,20 @@
             background-color: var(--gray);
             display: block;
             height: 0.2rem;
-            width: 1.5rem;
             margin-bottom: 0.25rem;
+            width: 1.5rem;
         }
     }
 
     .waypoint-title {
-        padding: 0.25rem;
-        font-weight: bold;
         flex-grow: 1;
+        font-weight: bold;
+        padding: 0.25rem;
     }
 
     .delete-icon {
-        width: 1.5rem;
         cursor: pointer;
+        width: 1.5rem;
 
         path {
             fill: var(--gray);

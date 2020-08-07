@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import 'leaflet/dist/leaflet.css'
 import Leaflet from 'leaflet'
 
-import './map.css'
+import './map.scss'
 
 const Map = () => {
     const map = useRef(null)
@@ -78,7 +78,7 @@ const Map = () => {
 
     return (
         <>
-            <div id="mapid"></div>
+            <div id="mapid" className="mapid"></div>
         </>
     )
 }

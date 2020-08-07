@@ -1,0 +1,20 @@
+.mapid {
+    height: 100vh;
+    outline: none;
+    position: relative;
+    width: 100vw;
+}
+
+.marker-text {
+    background-color: var(--almost-black);
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 1.3rem;
+    font-weight: bold;
+    height: 2rem !important;
+    margin-left: -1rem !important;
+    margin-top: -1rem !important;
+    text-align: center;
+    vertical-align: middle;
+    width: 2rem !important;
+}

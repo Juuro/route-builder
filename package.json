@@ -25,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src",
+    "lint": "stylelint \"**/*.s+(a|c)ss\" && eslint src",
     "test:coverage": "yarn test --coverage --watchAll=false"
   },
   "eslintConfig": {
@@ -45,8 +45,12 @@
   },
   "devDependencies": {
     "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-react-hooks": "^4.0.8",
     "eslint-plugin-security": "^1.4.0",
-    "node-sass": "^4.14.1"
+    "node-sass": "^4.14.1",
+    "stylelint": "^13.6.1",
+    "stylelint-config-sass-guidelines": "^7.0.0"
   },
   "jest": {
     "coverageReporters": [
