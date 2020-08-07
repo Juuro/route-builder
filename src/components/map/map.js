@@ -52,6 +52,9 @@ const Map = () => {
         className: 'marker-text',
       }))
       setMarkers((existingMarkers) => [...existingMarkers, newMarker])
+    }
+
+    return () => {
       setNewMarker(null)
     }
   }, [newMarker, markers])
@@ -69,6 +72,10 @@ const Map = () => {
       color: '#4085E1',
       weight: 8,
     }).addTo(map.current)
+
+    return () => {
+      setNewMarkerPosition(null)
+    }
   }, [markers, newMarkerPosition])
 
   return (
