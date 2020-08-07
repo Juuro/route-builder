@@ -12,22 +12,23 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement, id}) => {
   const onDragStart = ({target}) => {
     setDragElement(waypoint)
     setTimeout(() => {
-      target.style.visibility = 'hidden'
+      target.style.opacity = .5
+      target.classList.add('dragging')
     }, 1)
   }
 
-  const onDragOver = event => {
-    console.log('event.target: ', event.target.innerText)
-    moveWaypoint(event.target.innerText)
+  const onDragOver = id => event=> {
+    moveWaypoint(id)
     event.preventDefault()
   }
 
-  const onDragEnd = event => {
-    event.target.style.visibility = 'visible'
+  const onDragEnd = ({target}) => {
+    target.style.opacity = 1
+    target.classList.remove('dragging')
   }
 
   return (
-    <div className="waypoint" draggable="true" onDragStart={onDragStart} onDragOver={onDragOver} onDragEnd={onDragEnd} data-lala={id} id={id}>
+    <div className="waypoint" draggable="true" onDragStart={onDragStart} onDragOver={onDragOver(id)} onDragEnd={onDragEnd}>
       <div className="waypoint-drag-handle">
         <span></span>
         <span></span>

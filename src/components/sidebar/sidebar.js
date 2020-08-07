@@ -14,13 +14,9 @@ const Sidebar = () => {
         return i.id === dragEl.id
       })
       const hoverIndex = prevState.findIndex(i => {
-        console.log('i.id: ', i.id)
-        console.log('el: ', el)
         return i.id === el
       })
       const newstate = [...prevState]
-
-      console.log(hoverIndex)
 
       newstate.splice(itemIndex, 1)
       newstate.splice(hoverIndex, 0, dragEl)
