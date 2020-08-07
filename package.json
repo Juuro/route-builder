@@ -2,6 +2,15 @@
   "name": "route-builder",
   "version": "0.1.0",
   "private": true,
+  "author": "Sebastian Engel",
+  "homepage": "https://blissful-feynman-b21b41.netlify.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juuro/route-builder"
+  },
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -15,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src",
+    "test:coverage": "yarn test --coverage --watchAll=false"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,6 +41,16 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "node-sass": "^4.14.1"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text",
+      "cobertura",
+      "lcov"
     ]
   }
 }
