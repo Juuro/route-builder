@@ -6,31 +6,25 @@ import './map.css'
 
 const Map = () => {
   let map = useRef(null)
-  let markers = []
   let path = useRef({})
 
-  const [coordinates, setCoordinates] = useState([])
+  const [markers, setMarkers] = useState([])
+  const [newMarker, setNewMarker] = useState(null)
+  const [newMarkerPosition, setNewMarkerPosition] = useState(null)
 
-  const onMapClick = (event) => {
+  const onMarkerMove = useCallback(event => {
+    setNewMarkerPosition(event.latlng)
+  }, [])
+
+  const onMapClick = useCallback((event) => {
     const marker = Leaflet.marker(event.latlng, {
       draggable: true,
-      icon: Leaflet.divIcon({
-        html: markers.length + 1,
-        className: 'marker-text',
-      }),
-    }).addTo(map.current)
-    marker.on('move', onMarkerMove)
+    }).addTo(map.current).on('move', onMarkerMove)
 
-    markers.push(marker)
-    setCoordinates((coordinates) => [
-      ...coordinates,
-      [event.latlng.lat, event.latlng.lng],
-    ])
-  }
+    setNewMarker(marker)
+  }, [onMarkerMove])
 
-  const stableOnMapClick = useCallback(onMapClick, [])
-
-  useEffect(() => {
+  useEffect(() => { 
     map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
 
     Leaflet.tileLayer(
@@ -47,19 +41,25 @@ const Map = () => {
       }
     ).addTo(map.current)
 
-    map.current.on('click', stableOnMapClick)
-  }, [stableOnMapClick])
+    map.current.on('click', onMapClick)
+
+  }, [onMapClick])
 
   useEffect(() => {
-    map.current.removeLayer(path.current)
+    if (newMarker) {
+      newMarker.setIcon(Leaflet.divIcon({
+        html: markers.length + 1,
+        className: 'marker-text',
+      }))
+      setMarkers((existingMarkers) => [...existingMarkers, newMarker])
+    }
 
-    path.current = Leaflet.polyline(coordinates, {
-      color: '#4085E1',
-      weight: 8,
-    }).addTo(map.current)
-  }, [coordinates])
+    return () => {
+      setNewMarker(null)
+    }
+  }, [newMarker, markers])
 
-  const onMarkerMove = () => {
+  useEffect(() => {
     map.current.removeLayer(path.current)
 
     let newCoordinates = []
@@ -67,8 +67,16 @@ const Map = () => {
       const latlng = marker.getLatLng()
       newCoordinates.push([latlng.lat, latlng.lng])
     })
-    setCoordinates(newCoordinates)
-  }
+
+    path.current = Leaflet.polyline(newCoordinates, {
+      color: '#4085E1',
+      weight: 8,
+    }).addTo(map.current)
+
+    return () => {
+      setNewMarkerPosition(null)
+    }
+  }, [markers, newMarkerPosition])
 
   return (
     <>
