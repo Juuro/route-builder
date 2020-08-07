@@ -1,0 +1,38 @@
+main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+button {
+    align-items: center;
+    background-color: var(--green);
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    color: var(--black);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 1.125rem;
+    font-weight: 700;
+    justify-content: center;
+    margin: 0;
+    padding-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.5rem;
+    transition-duration: 0.1s, 0.1s;
+    transition-property: background, color;
+    transition-timing-function: ease-in-out, ease-in-out;
+}
+
+button:hover,
+button:focus,
+button:active {
+    background-color: var(--green-hover);
+}
+
+@media (min-width: 548px) {
+    main {
+        flex-direction: row;
+    }
+}
