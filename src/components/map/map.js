@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import 'leaflet/dist/leaflet.css'
 import Leaflet from 'leaflet'
 
@@ -12,19 +12,19 @@ const Map = () => {
   const [newMarker, setNewMarker] = useState(null)
   const [newMarkerPosition, setNewMarkerPosition] = useState(null)
 
-  const onMarkerMove = useCallback(event => {
-    setNewMarkerPosition(event.latlng)
-  }, [])
-
-  const onMapClick = useCallback((event) => {
-    const marker = Leaflet.marker(event.latlng, {
-      draggable: true,
-    }).addTo(map.current).on('move', onMarkerMove)
-
-    setNewMarker(marker)
-  }, [onMarkerMove])
-
   useEffect(() => { 
+    const onMarkerMove = event => {
+      setNewMarkerPosition(event.latlng)
+    }
+
+    const onMapClick = event => {
+      const marker = Leaflet.marker(event.latlng, {
+        draggable: true,
+      }).addTo(map.current).on('move', onMarkerMove)
+  
+      setNewMarker(marker)
+    }
+
     map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
 
     Leaflet.tileLayer(
@@ -43,7 +43,7 @@ const Map = () => {
 
     map.current.on('click', onMapClick)
 
-  }, [onMapClick])
+  }, [])
 
   useEffect(() => {
     if (newMarker) {
