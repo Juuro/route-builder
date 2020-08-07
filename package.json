@@ -2,6 +2,15 @@
   "name": "route-builder",
   "version": "0.1.0",
   "private": true,
+  "author": "Sebastian Engel",
+  "homepage": "https://blissful-feynman-b21b41.netlify.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juuro/route-builder"
+  },
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
