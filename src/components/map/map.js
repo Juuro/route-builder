@@ -24,7 +24,7 @@ const Map = () => {
         const onMapClick = event => {
             const marker = Leaflet.marker(event.latlng, {
                 draggable: true,
-            }).addTo(map.current).on('move', onMarkerMove)
+            }).setIcon(Leaflet.divIcon()).addTo(map.current).on('move', onMarkerMove)
 
             setNewMarker(marker)
         }
