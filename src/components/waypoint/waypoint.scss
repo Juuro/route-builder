@@ -16,13 +16,13 @@
 
     .waypoint-drag-handle {
         cursor: move;
-        padding: 0.25rem;
+        padding: .25rem;
 
         span {
             background-color: var(--gray);
             display: block;
-            height: 0.2rem;
-            margin-bottom: 0.25rem;
+            height: .2rem;
+            margin-bottom: .25rem;
             width: 1.5rem;
         }
     }
@@ -30,7 +30,7 @@
     .waypoint-title {
         flex-grow: 1;
         font-weight: bold;
-        padding: 0.25rem;
+        padding: .25rem;
     }
 
     .delete-icon {

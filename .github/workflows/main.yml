@@ -10,7 +10,5 @@ jobs:
         node-version: '12'
     - name: Install modules
       run: yarn
-    - name: Run tests
-      run: yarn test --watchAll=false
     - name: Run Linter
       run: yarn lint
