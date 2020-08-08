@@ -13,7 +13,7 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement, id}) => {
     const onDragStart = ({target}) => {
         setDragElement(waypoint)
         setTimeout(() => {
-            target.style.opacity = 0.5
+            target.style.opacity = 0.2
             target.classList.add('dragging')
         }, 1)
     }
