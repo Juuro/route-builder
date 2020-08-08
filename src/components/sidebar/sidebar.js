@@ -7,13 +7,6 @@ import './sidebar.scss'
 
 const Sidebar = () => {
     const dispatch = useDispatch()
-    // const [waypoints, setWaypoints] = useState([
-    //     {id: 1},
-    //     {id: 2},
-    //     {id: 3},
-    //     {id: 4},
-    //     {id: 5},
-    // ])
     const [dragEl, setDragEl] = useState(null)
 
     const markers = useSelector(state => state.markers)
@@ -28,18 +21,6 @@ const Sidebar = () => {
         newMarkers.splice(hoverIndex, 0, dragEl)
 
         dispatch({type: 'REPLACE_MARKERS', payload: newMarkers})
-
-
-        // setWaypoints(prevState => {
-        //     const itemIndex = prevState.findIndex(waypoint => waypoint.id === dragEl.id)
-        //     const hoverIndex = prevState.findIndex(waypoint => waypoint.id === el)
-        //     const newstate = [...prevState]
-
-        //     newstate.splice(itemIndex, 1)
-        //     newstate.splice(hoverIndex, 0, dragEl)
-
-        //     return [...newstate]
-        // })
     }
 
     const setDragElement = el => {
@@ -53,8 +34,8 @@ const Sidebar = () => {
             <div className="waypoints">
                 {markers.map((waypoint, index) => (
                     <Waypoint
-                        key={index}
-                        id={index}
+                        key={waypoint.id}
+                        id={waypoint.id}
                         waypoint={waypoint}
                         moveWaypoint={moveWaypoint}
                         setDragElement={setDragElement}
