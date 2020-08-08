@@ -11,7 +11,6 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement, id}) => {
     const map = useSelector(state => state.map)
 
     const removeWaypoint = () => {
-        console.log('removeWaypoint', waypoint.marker)
         waypoint.marker.removeFrom(map)
         dispatch({type: 'REMOVE_MARKER', payload: waypoint.id})
     }

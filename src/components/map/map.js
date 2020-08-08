@@ -6,7 +6,7 @@ import Leaflet from 'leaflet'
 
 import './map.scss'
 
-const Map = props => {
+const Map = () => {
     const dispatch = useDispatch()
 
     const map = useRef(null)
@@ -46,12 +46,21 @@ const Map = props => {
 
         map.current.on('click', onMapClick)
 
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
+        const calculateMarkerId = () => {
+            let maximum = 1
+            if (markers.length) {
+                maximum = markers.reduce((prev, current) => (prev.id > current.id) ? prev : current)
+                return maximum.id+1
+            }
+            return maximum
+        }
+
         if (newMarker) {
             newMarker.setIcon(Leaflet.divIcon({
-                html: markers.length + 1,
+                html: calculateMarkerId(),
                 className: 'marker-text',
             }))
 

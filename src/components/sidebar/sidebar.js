@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import Waypoint from '../waypoint/waypoint'
@@ -32,7 +32,7 @@ const Sidebar = () => {
             <h1>Route Builder</h1>
             <hr />
             <div className="waypoints">
-                {markers.map((waypoint, index) => (
+                {markers.map(waypoint => (
                     <Waypoint
                         key={waypoint.id}
                         id={waypoint.id}
