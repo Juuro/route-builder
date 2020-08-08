@@ -12,7 +12,7 @@ const Map = props => {
     const map = useRef(null)
     const path = useRef({})
 
-    const [markers, setMarkers] = useState(useSelector(state => state.markers))
+    const markers = useSelector(state => state.markers)
     const [newMarker, setNewMarker] = useState(null)
     const [newMarkerPosition, setNewMarkerPosition] = useState(null)
 
@@ -53,7 +53,7 @@ const Map = props => {
                 html: markers.length + 1,
                 className: 'marker-text',
             }))
-            setMarkers(existingMarkers => [...existingMarkers, newMarker])
+            //setMarkers(existingMarkers => [...existingMarkers, newMarker])
             dispatch({type: 'MARKERS', payload: newMarker})
         }
 
@@ -86,10 +86,6 @@ const Map = props => {
             <div id="mapid" className="mapid"></div>
         </>
     )
-}
-
-Map.propTypes = {
-    markers: PropTypes.array.isRequired,
 }
 
 export default Map

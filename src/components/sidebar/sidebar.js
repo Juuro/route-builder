@@ -6,6 +6,7 @@ import Waypoint from '../waypoint/waypoint'
 import './sidebar.scss'
 
 const Sidebar = () => {
+    const dispatch = useDispatch()
     const [waypoints, setWaypoints] = useState([
         {id: 1},
         {id: 2},
@@ -14,12 +15,8 @@ const Sidebar = () => {
         {id: 5},
     ])
     const [dragEl, setDragEl] = useState(null)
-    const [markers, setMarkers] = useState(useSelector(state => {
-        console.log('Sidebar init', state.markers)
-        return state.markers
-    }))
 
-    const dinger = useSelector(state => state.markers)
+    const markers = useSelector(state => state.markers)
 
     const moveWaypoint = el => {
         setWaypoints(prevState => {
@@ -39,7 +36,7 @@ const Sidebar = () => {
     }
 
     useEffect(() => {
-        console.log('Sidebar', dinger)
+        console.log('Sidebar markers', markers)
     })
 
     return (
@@ -47,7 +44,7 @@ const Sidebar = () => {
             <h1>Route Builder</h1>
             <hr />
             <div className="waypoints">
-                {dinger.map((waypoint, index) => (
+                {markers.map((waypoint, index) => (
                     <Waypoint
                         key={index}
                         id={index}
