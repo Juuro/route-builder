@@ -18,7 +18,9 @@
     "leaflet": "^1.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-redux": "^7.2.1",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,6 +51,7 @@
     "eslint-plugin-react-hooks": "^4.0.8",
     "eslint-plugin-security": "^1.4.0",
     "node-sass": "^4.14.1",
+    "redux-logger": "^3.0.6",
     "stylelint": "^13.6.1",
     "stylelint-config-sass-guidelines": "^7.0.0"
   },

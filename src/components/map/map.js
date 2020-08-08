@@ -1,14 +1,18 @@
 import React, {useState, useEffect, useRef} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import PropTypes from 'prop-types'
 import 'leaflet/dist/leaflet.css'
 import Leaflet from 'leaflet'
 
 import './map.scss'
 
-const Map = () => {
+const Map = props => {
+    const dispatch = useDispatch()
+
     const map = useRef(null)
     const path = useRef({})
 
-    const [markers, setMarkers] = useState([])
+    const [markers, setMarkers] = useState(useSelector(state => state.markers))
     const [newMarker, setNewMarker] = useState(null)
     const [newMarkerPosition, setNewMarkerPosition] = useState(null)
 
@@ -50,12 +54,13 @@ const Map = () => {
                 className: 'marker-text',
             }))
             setMarkers(existingMarkers => [...existingMarkers, newMarker])
+            dispatch({type: 'MARKERS', payload: newMarker})
         }
 
         return () => {
             setNewMarker(null)
         }
-    }, [newMarker, markers])
+    }, [newMarker, markers, dispatch])
 
     useEffect(() => {
         map.current.removeLayer(path.current)
@@ -81,6 +86,10 @@ const Map = () => {
             <div id="mapid" className="mapid"></div>
         </>
     )
+}
+
+Map.propTypes = {
+    markers: PropTypes.array.isRequired,
 }
 
 export default Map
