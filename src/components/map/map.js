@@ -1,14 +1,18 @@
 import React, {useState, useEffect, useRef} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+
 import 'leaflet/dist/leaflet.css'
 import Leaflet from 'leaflet'
 
 import './map.scss'
 
 const Map = () => {
+    const dispatch = useDispatch()
+
     const map = useRef(null)
     const path = useRef({})
 
-    const [markers, setMarkers] = useState([])
+    const markers = useSelector(state => state.markers)
     const [newMarker, setNewMarker] = useState(null)
     const [newMarkerPosition, setNewMarkerPosition] = useState(null)
 
@@ -27,6 +31,7 @@ const Map = () => {
 
         // eslint-disable-next-line no-magic-numbers
         map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
+        dispatch({type: 'ADD_MAP', payload: map.current})
 
         Leaflet.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution:
@@ -41,27 +46,40 @@ const Map = () => {
 
         map.current.on('click', onMapClick)
 
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
+        const calculateMarkerId = () => {
+            let maximum = 1
+            if (markers.length) {
+                maximum = markers.reduce((prev, current) => (prev.id > current.id) ? prev : current)
+                return maximum.id+1
+            }
+            return maximum
+        }
+
         if (newMarker) {
+            const markerId = calculateMarkerId()
             newMarker.setIcon(Leaflet.divIcon({
-                html: markers.length + 1,
+                html: markerId,
                 className: 'marker-text',
             }))
-            setMarkers(existingMarkers => [...existingMarkers, newMarker])
+
+            const addMarker = {id: markerId, marker: newMarker}
+
+            dispatch({type: 'ADD_MARKERS', payload: addMarker})
         }
 
         return () => {
             setNewMarker(null)
         }
-    }, [newMarker, markers])
+    }, [newMarker, markers, dispatch])
 
     useEffect(() => {
         map.current.removeLayer(path.current)
 
         const newCoordinates = []
-        markers.forEach(marker => {
+        markers.forEach(({marker}) => {
             const latlng = marker.getLatLng()
             newCoordinates.push([latlng.lat, latlng.lng])
         })

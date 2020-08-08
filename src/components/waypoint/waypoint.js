@@ -1,19 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {useDispatch, useSelector} from 'react-redux'
 
 import {ReactComponent as DeleteIcon} from './delete.svg'
 
 import './waypoint.scss'
 
 const Waypoint = ({waypoint, moveWaypoint, setDragElement, id}) => {
+    const dispatch = useDispatch()
+    const map = useSelector(state => state.map)
+
     const removeWaypoint = () => {
-        // console.log('removeWaypoint')
+        waypoint.marker.removeFrom(map)
+        dispatch({type: 'REMOVE_MARKER', payload: waypoint.id})
     }
 
     const onDragStart = ({target}) => {
         setDragElement(waypoint)
         setTimeout(() => {
-            target.style.opacity = 0.5
+            target.style.opacity = 0.2
             target.classList.add('dragging')
         }, 1)
     }
@@ -41,7 +46,7 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement, id}) => {
                 <span></span>
                 <span></span>
             </div>
-            <div className="waypoint-title">Waypoint {id}</div>
+            <div className="waypoint-title">Waypoint {waypoint.id}</div>
             <div className="waypoint-delete">
                 <DeleteIcon className="delete-icon" onClick={removeWaypoint} />
             </div>

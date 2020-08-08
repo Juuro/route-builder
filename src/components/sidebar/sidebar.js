@@ -1,30 +1,26 @@
 import React, {useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 
 import Waypoint from '../waypoint/waypoint'
 
 import './sidebar.scss'
 
 const Sidebar = () => {
-    const [waypoints, setWaypoints] = useState([
-        {id: 1},
-        {id: 2},
-        {id: 3},
-        {id: 4},
-        {id: 5},
-    ])
+    const dispatch = useDispatch()
     const [dragEl, setDragEl] = useState(null)
 
+    const markers = useSelector(state => state.markers)
+
     const moveWaypoint = el => {
-        setWaypoints(prevState => {
-            const itemIndex = prevState.findIndex(waypoint => waypoint.id === dragEl.id)
-            const hoverIndex = prevState.findIndex(waypoint => waypoint.id === el)
-            const newstate = [...prevState]
 
-            newstate.splice(itemIndex, 1)
-            newstate.splice(hoverIndex, 0, dragEl)
+        const itemIndex = markers.findIndex(marker => marker.id === dragEl.id)
+        const hoverIndex = markers.findIndex(marker => marker.id === el)
+        const newMarkers = [...markers]
 
-            return [...newstate]
-        })
+        newMarkers.splice(itemIndex, 1)
+        newMarkers.splice(hoverIndex, 0, dragEl)
+
+        dispatch({type: 'REPLACE_MARKERS', payload: newMarkers})
     }
 
     const setDragElement = el => {
@@ -36,7 +32,7 @@ const Sidebar = () => {
             <h1>Route Builder</h1>
             <hr />
             <div className="waypoints">
-                {waypoints.map(waypoint => (
+                {markers.map(waypoint => (
                     <Waypoint
                         key={waypoint.id}
                         id={waypoint.id}
