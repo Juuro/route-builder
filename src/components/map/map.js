@@ -54,7 +54,7 @@ const Map = props => {
                 className: 'marker-text',
             }))
 
-            dispatch({type: 'MARKERS', payload: newMarker})
+            dispatch({type: 'ADD_MARKERS', payload: newMarker})
         }
 
         return () => {
