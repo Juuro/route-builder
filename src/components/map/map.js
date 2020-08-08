@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import PropTypes from 'prop-types'
+
 import 'leaflet/dist/leaflet.css'
 import Leaflet from 'leaflet'
 
@@ -31,6 +31,7 @@ const Map = props => {
 
         // eslint-disable-next-line no-magic-numbers
         map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
+        dispatch({type: 'ADD_MAP', payload: map.current})
 
         Leaflet.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution:

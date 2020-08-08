@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 import {ReactComponent as DeleteIcon} from './delete.svg'
 
@@ -8,10 +8,11 @@ import './waypoint.scss'
 
 const Waypoint = ({waypoint, moveWaypoint, setDragElement, id}) => {
     const dispatch = useDispatch()
+    const map = useSelector(state => state.map)
 
     const removeWaypoint = () => {
         console.log('removeWaypoint', waypoint.marker)
-
+        waypoint.marker.removeFrom(map)
         dispatch({type: 'REMOVE_MARKER', payload: waypoint.id})
     }
 

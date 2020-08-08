@@ -15,6 +15,9 @@ const reducer = (state = initialState, action) => {
             const newState = state.markers.filter(marker => marker.id !== action.payload)
             return {...state, markers: [...newState]}
         }
+        case 'ADD_MAP': {
+            return {...state, map: action.payload}
+        }
         default: {
             return state
         }
