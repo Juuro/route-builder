@@ -41,7 +41,7 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement, id}) => {
                 <span></span>
                 <span></span>
             </div>
-            <div className="waypoint-title">Waypoint {id}</div>
+            <div className="waypoint-title">Waypoint {waypoint.id}</div>
             <div className="waypoint-delete">
                 <DeleteIcon className="delete-icon" onClick={removeWaypoint} />
             </div>

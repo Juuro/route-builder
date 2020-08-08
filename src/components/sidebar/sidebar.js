@@ -35,10 +35,6 @@ const Sidebar = () => {
         setDragEl(el)
     }
 
-    useEffect(() => {
-        console.log('Sidebar markers', markers)
-    })
-
     return (
         <aside className="sidebar">
             <h1>Route Builder</h1>

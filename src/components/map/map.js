@@ -53,7 +53,7 @@ const Map = props => {
                 html: markers.length + 1,
                 className: 'marker-text',
             }))
-            //setMarkers(existingMarkers => [...existingMarkers, newMarker])
+
             dispatch({type: 'MARKERS', payload: newMarker})
         }
 
@@ -66,7 +66,7 @@ const Map = props => {
         map.current.removeLayer(path.current)
 
         const newCoordinates = []
-        markers.forEach(marker => {
+        markers.forEach(({marker}) => {
             const latlng = marker.getLatLng()
             newCoordinates.push([latlng.lat, latlng.lng])
         })
