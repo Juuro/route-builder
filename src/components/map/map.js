@@ -59,12 +59,15 @@ const Map = () => {
         }
 
         if (newMarker) {
+            const markerId = calculateMarkerId()
             newMarker.setIcon(Leaflet.divIcon({
-                html: calculateMarkerId(),
+                html: markerId,
                 className: 'marker-text',
             }))
 
-            dispatch({type: 'ADD_MARKERS', payload: newMarker})
+            const addMarker = {id: markerId, marker: newMarker}
+
+            dispatch({type: 'ADD_MARKERS', payload: addMarker})
         }
 
         return () => {
