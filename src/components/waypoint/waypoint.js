@@ -1,13 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {useDispatch} from 'react-redux'
 
 import {ReactComponent as DeleteIcon} from './delete.svg'
 
 import './waypoint.scss'
 
 const Waypoint = ({waypoint, moveWaypoint, setDragElement, id}) => {
+    const dispatch = useDispatch()
+
     const removeWaypoint = () => {
-        // console.log('removeWaypoint')
+        console.log('removeWaypoint', waypoint.marker)
+
+        dispatch({type: 'REMOVE_MARKER', payload: waypoint.id})
     }
 
     const onDragStart = ({target}) => {

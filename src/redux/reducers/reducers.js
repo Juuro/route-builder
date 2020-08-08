@@ -11,6 +11,10 @@ const reducer = (state = initialState, action) => {
         case 'REPLACE_MARKERS': {
             return {...state, markers: [...action.payload]}
         }
+        case 'REMOVE_MARKER': {
+            const newState = state.markers.filter(marker => marker.id !== action.payload)
+            return {...state, markers: [...newState]}
+        }
         default: {
             return state
         }
