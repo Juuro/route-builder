@@ -28,8 +28,6 @@ const Sidebar = () => {
     }
 
     const generateTrkpt = () => {
-
-        // add reslut to string??
         const trkptArray = markers.map(marker => {
             const {lat} = marker.marker.getLatLng()
             const {lng} = marker.marker.getLatLng()
@@ -41,24 +39,23 @@ const Sidebar = () => {
     }
 
     const generateGPX = () => {
-        const gpx = `
-<?xml version='1.0' encoding='UTF-8'?>
+        const gpx = `<?xml version='1.0' encoding='UTF-8'?>
 <gpx version="1.1" creator="https://blissful-feynman-b21b41.netlify.app/" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
-<metadata>
-    <name>Cross Country Running Route</name>
-    <author>
-    <link href="https://blissful-feynman-b21b41.netlify.app/">
-        <text>Route Builder</text>
-        <type>text/html</type>
-    </link>
-    </author>
-</metadata>
-<trk>
-    <name>Cross Country Running Route</name>
-    <trkseg>
-${generateTrkpt()}
-    </trkseg>
-</trk>
+    <metadata>
+        <name>Cross Country Running Route</name>
+        <author>
+        <link href="https://blissful-feynman-b21b41.netlify.app/">
+            <text>Route Builder</text>
+            <type>text/html</type>
+        </link>
+        </author>
+    </metadata>
+    <trk>
+        <name>Cross Country Running Route</name>
+        <trkseg>
+    ${generateTrkpt()}
+        </trkseg>
+    </trk>
 </gpx>`
 
         return gpx
@@ -66,10 +63,16 @@ ${generateTrkpt()}
 
     const downloadGPX = event => {
         if (markers.length) {
-            generateGPX()
+            const element = document.createElement('a')
+            const file = new Blob([generateGPX()], {type: 'text/plain'})
+            element.href = URL.createObjectURL(file)
+            element.download = 'route.gpx'
+            document.body.appendChild(element)
+            element.click()
         } else {
             event.preventDefault()
         }
+        // TODO: "Release" button after click.
     }
 
     return (
