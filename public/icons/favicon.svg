@@ -1,14 +1,1 @@
-<svg width="144" height="144" xmlns="http://www.w3.org/2000/svg">
-	<style>
-		circle { fill: #383838; }
-		text { fill: #ffffff; }
-		@media (prefers-color-scheme: dark) { 
-                  circle { fill: #ffffff; }
-                  text { fill: #383838; }
-		}
-	</style>
-	<circle cx="72" cy="72" r="72" />
-	<text font-size="100" font-family="Helvetica Neue" font-weight="bold" text-anchor="middle" alignment-baseline="middle" x="72" y="72">
-		1
-	</text>
-</svg>
+<svg width="144" height="144" xmlns="http://www.w3.org/2000/svg"><style>@media (prefers-color-scheme:dark){circle{fill:#fff}text{fill:#383838}}</style><circle cx="72" cy="72" r="72" fill="#383838"/><text font-size="100" font-family="Helvetica Neue" font-weight="bold" text-anchor="middle" alignment-baseline="middle" x="72" y="72" fill="#fff">1</text></svg>
