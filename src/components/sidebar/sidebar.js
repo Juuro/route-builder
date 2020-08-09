@@ -64,7 +64,7 @@ const Sidebar = () => {
     const downloadGPX = event => {
         if (markers.length) {
             const element = document.createElement('a')
-            const file = new Blob([generateGPX()], {type: 'text/plain'})
+            const file = new Blob([generateGPX()], {type: 'application/gpx'})
             element.href = URL.createObjectURL(file)
             element.download = 'route.gpx'
             document.body.appendChild(element)
