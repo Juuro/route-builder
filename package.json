@@ -63,6 +63,12 @@
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     },
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/serviceWorker.js",
+      "!src/redux/store.js"
+    ],
     "coverageReporters": [
       "text",
       "cobertura",
