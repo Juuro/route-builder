@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "stylelint \"**/*.s+(a|c)ss\" && eslint src",
     "test:coverage": "yarn test --coverage --watchAll=false",
@@ -47,16 +47,22 @@
     ]
   },
   "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.3",
     "eslint-plugin-jest": "^23.20.0",
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-react-hooks": "^4.0.8",
     "eslint-plugin-security": "^1.4.0",
     "node-sass": "^4.14.1",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.4",
     "stylelint": "^13.6.1",
     "stylelint-config-sass-guidelines": "^7.0.0"
   },
   "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
     "coverageReporters": [
       "text",
       "cobertura",
