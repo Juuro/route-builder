@@ -6,7 +6,7 @@ import {ReactComponent as DeleteIcon} from './delete.svg'
 
 import './waypoint.scss'
 
-const Waypoint = ({waypoint, moveWaypoint, setDragElement, id}) => {
+const Waypoint = ({waypoint, moveWaypoint, setDragElement}) => {
     const dispatch = useDispatch()
     const map = useSelector(state => state.map)
 
@@ -38,7 +38,7 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement, id}) => {
             className="waypoint"
             draggable="true"
             onDragStart={onDragStart}
-            onDragOver={onDragOver(id)}
+            onDragOver={onDragOver(waypoint.id)}
             onDragEnd={onDragEnd}
         >
             <div className="waypoint-drag-handle">
@@ -47,8 +47,8 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement, id}) => {
                 <span></span>
             </div>
             <div className="waypoint-title">Waypoint {waypoint.id}</div>
-            <div className="waypoint-delete">
-                <DeleteIcon className="delete-icon" onClick={removeWaypoint} />
+            <div className="waypoint-delete" onClick={removeWaypoint}>
+                <DeleteIcon className="delete-icon" />
             </div>
         </div>
     )
@@ -58,7 +58,6 @@ Waypoint.propTypes = {
     waypoint: PropTypes.object.isRequired,
     moveWaypoint: PropTypes.func.isRequired,
     setDragElement: PropTypes.func.isRequired,
-    id: PropTypes.number.isRequired,
 }
 
 export default Waypoint
