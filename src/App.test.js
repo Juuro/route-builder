@@ -1,7 +1,9 @@
 import React from 'react'
-import {render} from '@testing-library/react'
+import {mount} from 'enzyme'
 import App from './App'
 
 it('Appp renders', () => {
-    expect(render(<App />))
+    const app = mount(<App />)
+
+    expect(app).toBeDOMComponent
 })

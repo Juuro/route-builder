@@ -1,9 +1,10 @@
-import React, {lazy, useState} from 'react'
+import React, {lazy, Suspense, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import './sidebar.scss'
 
 const Waypoint = lazy(() => import('../waypoint/waypoint'))
+const renderLoader = () => <p>Loading</p>
 
 const Sidebar = () => {
     const dispatch = useDispatch()
@@ -12,7 +13,6 @@ const Sidebar = () => {
     const markers = useSelector(state => state.markers)
 
     const moveWaypoint = el => {
-
         const itemIndex = markers.findIndex(marker => marker.id === dragEl.id)
         const hoverIndex = markers.findIndex(marker => marker.id === el)
         const newMarkers = [...markers]
@@ -79,14 +79,15 @@ const Sidebar = () => {
             <h1>Route Builder</h1>
             <hr />
             <div className="waypoints">
-                {markers.map(waypoint => (
-                    <Waypoint
-                        key={waypoint.id}
-                        id={waypoint.id}
-                        waypoint={waypoint}
-                        moveWaypoint={moveWaypoint}
-                        setDragElement={setDragElement}
-                    />
+                {markers.map((waypoint, index) => (
+                    <Suspense key={index} fallback={renderLoader()}>
+                        <Waypoint
+                            key={waypoint.id}
+                            waypoint={waypoint}
+                            moveWaypoint={moveWaypoint}
+                            setDragElement={setDragElement}
+                        />
+                    </Suspense>
                 ))}
             </div>
             <button onClick={downloadGPX}>

@@ -1,5 +1,5 @@
 const initialState = {
-    moep: true,
+    map: {},
     markers: [],
 }
 

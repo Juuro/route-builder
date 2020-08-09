@@ -11,6 +11,7 @@ const Map = () => {
 
     const map = useRef(null)
     const path = useRef({})
+    const mapElement = useRef(null)
 
     const markers = useSelector(state => state.markers)
     const [newMarker, setNewMarker] = useState(null)
@@ -30,7 +31,7 @@ const Map = () => {
         }
 
         // eslint-disable-next-line no-magic-numbers
-        map.current = Leaflet.map('mapid').setView([46.378333, 13.836667], 12)
+        map.current = Leaflet.map(mapElement.current).setView([46.378333, 13.836667], 12)
         dispatch({type: 'ADD_MAP', payload: map.current})
 
         Leaflet.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -51,9 +52,9 @@ const Map = () => {
     useEffect(() => {
         const calculateMarkerId = () => {
             let maximum = 1
-            if (markers.length) {
-                maximum = markers.reduce((prev, current) => (prev.id > current.id) ? prev : current)
-                return maximum.id+1
+            if (markers.length !== 0) {
+                const maximumMarker = markers.reduce((prev, current) => (prev.id > current.id) ? prev : current)
+                maximum = maximumMarker.id+1
             }
             return maximum
         }
@@ -87,7 +88,9 @@ const Map = () => {
         path.current = Leaflet.polyline(newCoordinates, {
             color: '#4085E1',
             weight: 8,
-        }).addTo(map.current)
+        })
+
+        path.current.addTo(map.current)
 
         return () => {
             setNewMarkerPosition(null)
@@ -96,7 +99,7 @@ const Map = () => {
 
     return (
         <>
-            <div id="mapid" className="mapid"></div>
+            <div className="mapid" ref={mapElement}></div>
         </>
     )
 }

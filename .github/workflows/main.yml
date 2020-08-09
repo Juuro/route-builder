@@ -12,3 +12,7 @@ jobs:
       run: yarn
     - name: Run Linter
       run: yarn lint
+    - name: Run Tests
+      run: yarn test --watchAll=false
+    - name: Run Test Coverage
+      run: yarn test:coverage
