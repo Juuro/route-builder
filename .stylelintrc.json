@@ -6,7 +6,6 @@
     "color-named": "never",
     "color-no-hex": true,
     "color-no-invalid-hex": true,
-    "color-function-notation": "modern",
     "declaration-block-no-redundant-longhand-properties": true,
     "number-leading-zero": "never",
     "number-no-trailing-zeros": true,
