@@ -30,7 +30,7 @@ describe('Waypoint', () => {
 
             deleteButton.simulate('click')
 
-            expect(store.getActions()).toEqual([{"payload": 1, "type": "REMOVE_MARKER"}])
+            expect(store.getActions()).toEqual([{payload: 1, type: 'REMOVE_MARKER'}])
         })
     })
 })
