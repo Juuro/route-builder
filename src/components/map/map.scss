@@ -8,6 +8,8 @@
 .marker-text {
     background-color: var(--almost-black);
     border-radius: 50%;
+    box-shadow: 0px 3px 11px -4px rgba(0,0,0,0.75);
+    color: var(--white);
     display: inline-block;
     font-size: 1.3rem;
     font-weight: bold;
@@ -17,4 +19,11 @@
     text-align: center;
     vertical-align: middle;
     width: 2rem !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .marker-text {
+        background-color: var(--white);
+        color: var(--almost-black);
+    }
 }
