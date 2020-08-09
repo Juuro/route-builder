@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, {lazy, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
-import Waypoint from '../waypoint/waypoint'
-
 import './sidebar.scss'
+
+const Waypoint = lazy(() => import('../waypoint/waypoint'))
 
 const Sidebar = () => {
     const dispatch = useDispatch()
@@ -72,7 +72,6 @@ const Sidebar = () => {
         } else {
             event.preventDefault()
         }
-        // TODO: "Release" button after click.
     }
 
     return (

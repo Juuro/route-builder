@@ -28,7 +28,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "stylelint \"**/*.s+(a|c)ss\" && eslint src",
-    "test:coverage": "yarn test --coverage --watchAll=false"
+    "test:coverage": "yarn test --coverage --watchAll=false",
+    "delete:untracked:branches": "git fetch -p && for branch in `git branch -vv | grep ': entfernt]' | awk '{print $1}'`; do git branch -D $branch; done"
   },
   "eslintConfig": {
     "extends": "react-app"
