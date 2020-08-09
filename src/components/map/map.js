@@ -52,9 +52,9 @@ const Map = () => {
     useEffect(() => {
         const calculateMarkerId = () => {
             let maximum = 1
-            if (markers.length) {
-                maximum = markers.reduce((prev, current) => (prev.id > current.id) ? prev : current)
-                return maximum.id+1
+            if (markers.length !== 0) {
+                const maximumMarker = markers.reduce((prev, current) => (prev.id > current.id) ? prev : current)
+                maximum = maximumMarker.id+1
             }
             return maximum
         }
