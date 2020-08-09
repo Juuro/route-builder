@@ -10,9 +10,6 @@ const App = () => (
     <main>
         <Suspense fallback={renderLoader()}>
             <Sidebar />
-        </Suspense>
-
-        <Suspense fallback={renderLoader()}>
             <Map />
         </Suspense>
     </main>
