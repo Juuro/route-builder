@@ -100,4 +100,27 @@ describe('Sidebar', () => {
             expect(DownloadGPXButton.length).toEqual(0)
         })
     })
+
+    describe('Sidebar position toggle', () => {
+        it('should move sidebar up', () => {
+            store.getState().markers = markers
+            const component = mount(<SidebarComponent />)
+            const sidebarPositionToggle = component.find('.sidebar-position-toggle')
+
+            sidebarPositionToggle.simulate('click')
+
+            expect(component.html()).toContain('sidebar up')
+        })
+
+        it('should move sidebar down', () => {
+            store.getState().markers = []
+            const component = mount(<SidebarComponent />)
+            const sidebarPositionToggle = component.find('.sidebar-position-toggle')
+
+            sidebarPositionToggle.simulate('click')
+            sidebarPositionToggle.simulate('click')
+
+            expect(component.html()).toContain('sidebar down')
+        })
+    })
 })
