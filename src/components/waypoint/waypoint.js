@@ -1,12 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {useDispatch, useSelector} from 'react-redux'
+import {polyfill} from 'mobile-drag-drop'
+import {scrollBehaviourDragImageTranslateOverride} from 'mobile-drag-drop/scroll-behaviour'
 
 import {ReactComponent as DeleteIcon} from './delete.svg'
 
 import './waypoint.scss'
 
 const Waypoint = ({waypoint, moveWaypoint, setDragElement}) => {
+    polyfill({dragImageTranslateOverride: scrollBehaviourDragImageTranslateOverride})
+
     const dispatch = useDispatch()
     const map = useSelector(state => state.map)
 
@@ -33,6 +37,10 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement}) => {
         target.classList.remove('dragging')
     }
 
+    const onDragEnter = event => {
+        event.preventDefault()
+    }
+
     return (
         <div
             className="waypoint"
@@ -40,6 +48,7 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement}) => {
             onDragStart={onDragStart}
             onDragOver={onDragOver(waypoint.id)}
             onDragEnd={onDragEnd}
+            onDragEnter={onDragEnter}
         >
             <div className="waypoint-drag-handle">
                 <span></span>
