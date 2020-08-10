@@ -86,7 +86,7 @@ describe('Sidebar', () => {
         it('should render button if there are markers', () => {
             store.getState().markers = markers
             const component = mount(<SidebarComponent />)
-            const DownloadGPXButton = component.find('button')
+            const DownloadGPXButton = component.find('.button-download-gpx')
 
             expect(DownloadGPXButton.text()).toEqual('Download your Route')
             expect(DownloadGPXButton.length).toEqual(1)
@@ -95,7 +95,7 @@ describe('Sidebar', () => {
         it('should not render button if there are no markers', () => {
             store.getState().markers = []
             const component = mount(<SidebarComponent />)
-            const DownloadGPXButton = component.find('button')
+            const DownloadGPXButton = component.find('.button-download-gpx')
 
             expect(DownloadGPXButton.length).toEqual(0)
         })

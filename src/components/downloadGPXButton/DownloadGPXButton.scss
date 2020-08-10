@@ -1,4 +1,4 @@
-button {
+.button-download-gpx {
     align-items: center;
     background-color: var(--green);
     border: 1px solid transparent;
@@ -14,15 +14,16 @@ button {
     transition-duration: .1s;
     transition-property: background, color, border;
     transition-timing-function: ease-in-out;
+    
+    &:hover,
+    &:focus {
+        background-color: var(--green-hover);
+    }
+    
+    &:active {
+        background-color: var(--almost-black);
+        border: 1px solid var(--green);
+        color: var(--green);
+    }
 }
 
-button:hover,
-button:focus {
-    background-color: var(--green-hover);
-}
-
-button:active {
-    background-color: var(--almost-black);
-    border: 1px solid var(--green);
-    color: var(--green);
-}
