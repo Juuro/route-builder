@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import './sidebar.scss'
@@ -8,9 +8,9 @@ import Waypoint from '../waypoint/waypoint'
 
 const Sidebar = () => {
     const dispatch = useDispatch()
-    const [dragWaypoint, setDragWaypoint] = useState(null)
 
     const markers = useSelector(state => state.markers)
+    const dragWaypoint = useSelector(state => state.dragWaypoint)
 
     const hasMarkerOrderChanged = newMarkers => {
         const markerIds = markersArray => markersArray.map(marker => marker[Object.keys(marker)[0]])
@@ -32,7 +32,7 @@ const Sidebar = () => {
     }
 
     const setDragElement = el => {
-        setDragWaypoint(el)
+        dispatch({type: 'ADD_DRAG_WAYPOINT', payload: el})
     }
 
     return (
