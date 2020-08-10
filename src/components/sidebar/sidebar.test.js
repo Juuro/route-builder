@@ -1,6 +1,6 @@
 import React from 'react'
 import {Provider} from 'react-redux'
-import {mount} from 'enzyme'
+import {mount, shallow} from 'enzyme'
 import configureStore from 'redux-mock-store'
 import {act} from 'react-dom/test-utils'
 
@@ -37,8 +37,8 @@ describe('Sidebar', () => {
             store.getState().markers = markers
             const component = mount(<SidebarComponent />)
             const waypoint = component.find('.waypoint').first()
-
             waypoint.simulate('dragstart')
+            waypoint.simulate('dragenter')
             act(() => {
                 jest.runOnlyPendingTimers()
             })

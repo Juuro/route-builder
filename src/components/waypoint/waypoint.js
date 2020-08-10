@@ -28,6 +28,7 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement}) => {
     }
 
     const onDragOver = waypointId => event => {
+        console.log('waypointId:', waypointId, event)
         moveWaypoint(waypointId)
         event.preventDefault()
     }

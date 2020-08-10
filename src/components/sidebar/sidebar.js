@@ -12,6 +12,12 @@ const Sidebar = () => {
 
     const markers = useSelector(state => state.markers)
 
+    const hasMarkerOrderChanged = newMarkers => {
+        const markerIds = markersArray => markersArray.map(marker => marker[Object.keys(marker)[0]])
+
+        return markerIds(newMarkers).toString() !== markerIds(markers).toString()
+    }
+
     const moveWaypoint = el => {
         const itemIndex = markers.findIndex(marker => marker.id === dragEl.id)
         const hoverIndex = markers.findIndex(marker => marker.id === el)
@@ -20,7 +26,9 @@ const Sidebar = () => {
         newMarkers.splice(itemIndex, 1)
         newMarkers.splice(hoverIndex, 0, dragEl)
 
-        dispatch({type: 'REPLACE_MARKERS', payload: newMarkers})
+        if (hasMarkerOrderChanged(newMarkers)) {
+            dispatch({type: 'REPLACE_MARKERS', payload: newMarkers})
+        }
     }
 
     const setDragElement = el => {
