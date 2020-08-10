@@ -1,10 +1,10 @@
-import React, {lazy, Suspense, useState} from 'react'
+import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import './sidebar.scss'
+import DownloadGPXButton from '../downloadGPXButton/DownloadGPXButton'
 
-const Waypoint = lazy(() => import('../waypoint/waypoint'))
-const renderLoader = () => <p>Loading</p>
+import Waypoint from '../waypoint/waypoint'
 
 const Sidebar = () => {
     const dispatch = useDispatch()
@@ -27,72 +27,22 @@ const Sidebar = () => {
         setDragEl(el)
     }
 
-    const generateTrkpt = () => {
-        const trkptArray = markers.map(marker => {
-            const {lat} = marker.marker.getLatLng()
-            const {lng} = marker.marker.getLatLng()
-
-            return `        <trkpt lat="${lat}" lon="${lng}"></trkpt>`
-        })
-
-        return trkptArray.join('\n')
-    }
-
-    const generateGPX = () => {
-        const gpx = `<?xml version='1.0' encoding='UTF-8'?>
-<gpx version="1.1" creator="https://blissful-feynman-b21b41.netlify.app/" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
-    <metadata>
-        <name>Cross Country Running Route</name>
-        <author>
-        <link href="https://blissful-feynman-b21b41.netlify.app/">
-            <text>Route Builder</text>
-            <type>text/html</type>
-        </link>
-        </author>
-    </metadata>
-    <trk>
-        <name>Cross Country Running Route</name>
-        <trkseg>
-    ${generateTrkpt()}
-        </trkseg>
-    </trk>
-</gpx>`
-
-        return gpx
-    }
-
-    const downloadGPX = event => {
-        if (markers.length) {
-            const element = document.createElement('a')
-            const file = new Blob([generateGPX()], {type: 'application/gpx'})
-            element.href = URL.createObjectURL(file)
-            element.download = 'route.gpx'
-            document.body.appendChild(element)
-            element.click()
-        }
-        event.currentTarget.blur()
-    }
-
     return (
         <aside className="sidebar">
             <h1>Route Builder</h1>
             <hr />
             <div className="waypoints">
-                <Suspense fallback={renderLoader()}>
-                    {markers.map(waypoint => (
-                        <Waypoint
-                            key={waypoint.id}
-                            id={waypoint.id}
-                            waypoint={waypoint}
-                            moveWaypoint={moveWaypoint}
-                            setDragElement={setDragElement}
-                        />
-                    ))}
-                </Suspense>
+                {markers.map(waypoint => (
+                    <Waypoint
+                        key={waypoint.id}
+                        id={waypoint.id}
+                        waypoint={waypoint}
+                        moveWaypoint={moveWaypoint}
+                        setDragElement={setDragElement}
+                    />
+                ))}
             </div>
-            <button onClick={downloadGPX}>
-                <span>Download your Route</span>
-            </button>
+            {markers.length ? <DownloadGPXButton /> : null}
         </aside>
     )
 }

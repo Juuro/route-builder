@@ -2,11 +2,10 @@ import React from 'react'
 import {Provider} from 'react-redux'
 import {mount} from 'enzyme'
 import configureStore from 'redux-mock-store'
-import {act} from 'react-dom/test-utils'
 
-import Sidebar from './sidebar'
+import DownloadGPXButton from './DownloadGPXButton'
 
-describe('Sidebar', () => {
+describe('DownloadGPXButton', () => {
     URL.createObjectURL = jest.fn()
 
     let store = {}
@@ -28,27 +27,27 @@ describe('Sidebar', () => {
         jest.clearAllMocks()
     })
 
-    const SidebarComponent = () => <Provider store={store}><Sidebar /></Provider>
+    const SidebarComponent = () => <Provider store={store}><DownloadGPXButton /></Provider>
 
-    describe('move waypoint', () => {
-        jest.useFakeTimers()
-
-        it('move dat waypint', () => {
+    describe('click download button', () => {
+        it('generate and download GPX file if there are any markers', () => {
             store.getState().markers = markers
             const component = mount(<SidebarComponent />)
-            const waypoint = component.find('.waypoint').first()
+            const downloadButton = component.find('button')
 
-            waypoint.simulate('dragstart')
-            act(() => {
-                jest.runOnlyPendingTimers()
-            })
+            downloadButton.simulate('click')
 
-            expect(waypoint.html()).toContain('dragging')
+            expect(URL.createObjectURL).toBeCalled()
+        })
 
-            waypoint.simulate('dragover')
-            waypoint.simulate('dragend')
+        it('do nothing if there are no markers', () => {
+            store.getState().markers = []
+            const component = mount(<SidebarComponent />)
+            const downloadButton = component.find('button')
 
-            expect(waypoint.html()).not.toContain('dragging')
+            downloadButton.simulate('click')
+
+            expect(URL.createObjectURL).not.toBeCalled()
         })
     })
 })
