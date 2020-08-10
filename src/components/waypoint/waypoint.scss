@@ -7,10 +7,6 @@
     padding: .25rem;
     transition: background-color .5s ease-out;
 
-    &:hover {
-        background-color: var(--light-grey);
-    }
-
     &.dragging {
         background-color: var(--white);
 
@@ -49,5 +45,11 @@
         .delete-icon path {
             fill: var(--grey);
         }
+    }
+}
+
+@media (hover: hover) {
+    .waypoint:hover {
+        background-color: var(--light-grey);
     }
 }
