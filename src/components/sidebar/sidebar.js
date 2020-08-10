@@ -79,16 +79,17 @@ const Sidebar = () => {
             <h1>Route Builder</h1>
             <hr />
             <div className="waypoints">
-                {markers.map((waypoint, index) => (
-                    <Suspense key={index} fallback={renderLoader()}>
+                <Suspense fallback={renderLoader()}>
+                    {markers.map(waypoint => (
                         <Waypoint
                             key={waypoint.id}
+                            id={waypoint.id}
                             waypoint={waypoint}
                             moveWaypoint={moveWaypoint}
                             setDragElement={setDragElement}
                         />
-                    </Suspense>
-                ))}
+                    ))}
+                </Suspense>
             </div>
             <button onClick={downloadGPX}>
                 <span>Download your Route</span>
