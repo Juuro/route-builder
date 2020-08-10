@@ -1,13 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
-import './sidebar.scss'
-import DownloadGPXButton from '../downloadGPXButton/DownloadGPXButton'
-
 import Waypoint from '../waypoint/waypoint'
+import DownloadGPXButton from '../downloadGPXButton/DownloadGPXButton'
+import {ReactComponent as ArrowIcon} from './arrow.svg'
+
+import './sidebar.scss'
 
 const Sidebar = () => {
     const dispatch = useDispatch()
+
+    const [sidebarPosition, setSidebarPosition] = useState('down')
 
     const markers = useSelector(state => state.markers)
     const dragWaypoint = useSelector(state => state.dragWaypoint)
@@ -35,8 +38,20 @@ const Sidebar = () => {
         dispatch({type: 'ADD_DRAG_WAYPOINT', payload: el})
     }
 
+    const toggleUpDown = () => {
+        setSidebarPosition(position => {
+            if (position === 'down') {
+                return 'up'
+            }
+            return 'down'
+        })
+    }
+
     return (
-        <aside className="sidebar">
+        <aside className={`sidebar ${sidebarPosition}`}>
+            <button className="sidebar-position-toggle button-no-button" onClick={toggleUpDown} title="Click to see all waypoints as a list">
+                <ArrowIcon className="sidebar-position-toggle-icon" />
+            </button>
             <h1>Route Builder</h1>
             <hr />
             <div className="waypoints">

@@ -4,11 +4,16 @@
     --almost-black: #383838;
     --black: #000;
     --blue: #4085e1;
-    --gray: #747474;
+    --grey: #747474;
+    --light-grey: hsla(0, 0%, 45%, .5);
     --green: #cae26a;
     --green-hover: #6b9237;
     --shadow-color: hsla(0, 0%, 0%, .75);
     // stylelint-enable
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -19,4 +24,20 @@ body {
     -webkit-font-smoothing: antialiased;
     height: 100vh;
     margin: 0;
+    overflow: hidden;
+}
+
+.button-no-button {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+
+    &:focus,
+    &:active,
+    &:hover,
+    &:visited {
+        background-color: transparent;
+        border: 0;
+        outline: 0;
+    }
 }

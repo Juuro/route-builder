@@ -1,27 +1,103 @@
 .sidebar {
     background-color: var(--almost-black);
+    box-shadow: 0 -4px 11px -4px var(--shadow-color);
     display: flex;
     flex-direction: column;
+    height: var(--vh);
     padding: 1rem;
-    width: auto;
-}
+    position: absolute;
+    transition: top .5s ease-out;
+    width: 100vw;
+    z-index: 2000;
 
-.waypoints {
-    flex-grow: 1;
-    margin-top: 5rem;
+    &.up {
+        top: calc(100vh - (var(--vh)));
+
+        .waypoints {
+            flex-grow: 1;
+            margin-bottom: 1rem;
+            overflow: scroll;
+        }        
+    }
+
+    &.down {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        box-shadow: 0 -4px 11px -4px var(--shadow-color);
+        top: calc(100vh / 1.5);
+        
+        .sidebar-position-toggle .sidebar-position-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .sidebar-position-toggle-icon path {
+            animation: pulse 2s infinite;
+            animation-delay: 1s;
+        }
+    }
+
+    .sidebar-position-toggle {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+
+        .sidebar-position-toggle-icon {
+            height: 2rem;
+            transition: transform .5s ease-out;
+
+            path {
+                fill: var(--grey);
+                transition: fill 1s ease-out;
+            }
+        }
+    }
 }
 
 hr {
-    background-color: var(--gray);
+    background-color: var(--grey);
     border: 0;
-    height: .3rem;
+    height: .2rem;
     width: 100%;
 }
 
-@media (min-width: 548px) {
+a,
+h1,
+hr,
+button {
+    flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
     .sidebar {
+        display: flex;
         flex: 0 0 388px;
+        flex-direction: column;
         max-height: 100vh;
         max-width: 388px;
+        position: static;
+        width: auto;
+
+        .sidebar-position-toggle {
+            display: none;
+        }
+
+        .waypoints {
+            flex-grow: 1;
+            margin-top: 5rem;
+        }
+    }
+}
+
+@keyframes pulse {
+    0% {
+        fill: var(--grey);
+    }
+
+    50% {
+        fill: var(--white);
+    }
+
+    100% {
+        fill: var(--grey);
     }
 }

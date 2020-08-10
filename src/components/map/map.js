@@ -44,7 +44,6 @@ const Map = () => {
         }).addTo(map.current)
 
         map.current.on('click', onMapClick)
-
     }, [dispatch])
 
     useEffect(() => {
@@ -59,10 +58,7 @@ const Map = () => {
 
         if (newMarker) {
             const markerId = calculateMarkerId()
-            newMarker.setIcon(Leaflet.divIcon({
-                html: markerId,
-                className: 'marker-text',
-            }))
+            newMarker.setIcon(Leaflet.divIcon({html: markerId, className: 'marker-text'}))
 
             const addMarker = {id: markerId, marker: newMarker}
 
@@ -83,10 +79,7 @@ const Map = () => {
             newCoordinates.push([latlng.lat, latlng.lng])
         })
 
-        path.current = Leaflet.polyline(newCoordinates, {
-            color: '#4085E1',
-            weight: 8,
-        })
+        path.current = Leaflet.polyline(newCoordinates, {color: '#4085E1', weight: 8})
 
         path.current.addTo(map.current)
 
