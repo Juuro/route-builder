@@ -32,7 +32,7 @@ const DownloadGPXButton = () => {
     }
 
     return (
-        <button className="button-download-gpx" onClick={downloadGPX}>
+        <button className="button-download-gpx" onClick={downloadGPX} title="Download GPX file">
             <span>Download your Route</span>
         </button>
     )

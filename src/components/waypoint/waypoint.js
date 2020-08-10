@@ -50,15 +50,15 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement}) => {
             onDragEnd={onDragEnd}
             onDragEnter={onDragEnter}
         >
-            <div className="waypoint-drag-handle">
+            <div className="waypoint-drag-handle" title="Drag this waypoint to reorder route">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <div className="waypoint-title">Waypoint {waypoint.id}</div>
-            <div className="waypoint-delete" onClick={removeWaypoint}>
+            <button className="waypoint-delete button-no-button" onClick={removeWaypoint} title="Delete this waypoint">
                 <DeleteIcon className="delete-icon" />
-            </div>
+            </button>
         </div>
     )
 }

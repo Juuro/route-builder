@@ -26,3 +26,18 @@ body {
     margin: 0;
     overflow: hidden;
 }
+
+.button-no-button {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+
+    &:focus,
+    &:active,
+    &:hover,
+    &:visited {
+        background-color: transparent;
+        border: 0;
+        outline: 0;
+    }
+}
