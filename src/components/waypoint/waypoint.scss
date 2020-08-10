@@ -1,9 +1,15 @@
 .waypoint {
+    align-items: center;
     border-radius: 4px;
     display: flex;
     flex-direction: row;
-    height: 2rem;
     margin: 1rem 0;
+    padding: .25rem;
+    transition: background-color .5s ease-out;
+
+    &:hover {
+        background-color: var(--light-grey);
+    }
 
     &.dragging {
         background-color: var(--white);
@@ -19,11 +25,14 @@
         padding: .25rem;
 
         span {
-            background-color: var(--gray);
+            background-color: var(--grey);
             display: block;
             height: .2rem;
-            margin-bottom: .25rem;
             width: 1.5rem;
+
+            &:not(:last-child) {
+                margin-bottom: .25rem;
+            }
         }
     }
 
@@ -33,12 +42,12 @@
         padding: .25rem;
     }
 
-    .delete-icon {
+    .waypoint-delete {
         cursor: pointer;
         width: 1.5rem;
 
-        path {
-            fill: var(--gray);
+        .delete-icon path {
+            fill: var(--grey);
         }
     }
 }

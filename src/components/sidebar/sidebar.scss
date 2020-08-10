@@ -2,26 +2,101 @@
     background-color: var(--almost-black);
     display: flex;
     flex-direction: column;
+    height: var(--vh);
     padding: 1rem;
-    width: auto;
-}
+    position: absolute;
+    transition: top .5s ease-out;
+    width: 100vw;
+    z-index: 2000;
 
-.waypoints {
-    flex-grow: 1;
-    margin-top: 5rem;
+    &.up {
+        top: calc(100vh - (var(--vh)));
+
+        &:before{
+            content: calc(100vh - (var(--vh)));
+        }
+
+        .waypoints {
+            flex-grow: 1;
+            margin-bottom: 1rem;
+            overflow: scroll;
+        }        
+    }
+
+    &.down {
+        top: calc(100vh / 1.5);
+        
+        .sidebar-position-toggle {
+            transform: rotate(180deg);
+        }
+
+        .sidebar-position-toggle-icon path {
+            animation: pulse 2s infinite;
+            animation-delay: 1s;
+        }
+    }
+
+    .sidebar-position-toggle {
+        display: flex;
+        justify-content: center;
+        transition: transform .5s ease-out;
+
+        .sidebar-position-toggle-icon {
+            height: 2rem;
+
+            path {
+                fill: var(--grey);
+                transition: fill 1s ease-out;
+            }
+        }
+    }
 }
 
 hr {
-    background-color: var(--gray);
+    background-color: var(--grey);
     border: 0;
-    height: .3rem;
+    height: .2rem;
     width: 100%;
 }
 
-@media (min-width: 548px) {
+a,
+h1,
+hr,
+button {
+    flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
     .sidebar {
+        display: flex;
         flex: 0 0 388px;
+        flex-direction: column;
         max-height: 100vh;
         max-width: 388px;
+        position: static;
+        width: auto;
+
+        .sidebar-position-toggle {
+            display: none;
+        }
+
+        .waypoints {
+            flex-grow: 1;
+            margin-top: 5rem;
+        }
+    }
+}
+
+@keyframes pulse {
+    0% {
+        fill: var(--grey);
+    }
+
+    50% {
+        fill: var(--white);
+    }
+
+    100% {
+        fill: var(--grey);
     }
 }
