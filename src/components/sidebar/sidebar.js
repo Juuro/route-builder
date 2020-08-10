@@ -69,9 +69,8 @@ const Sidebar = () => {
             element.download = 'route.gpx'
             document.body.appendChild(element)
             element.click()
-        } else {
-            event.preventDefault()
         }
+        event.currentTarget.blur()
     }
 
     return (
