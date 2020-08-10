@@ -1,5 +1,6 @@
 .sidebar {
     background-color: var(--almost-black);
+    box-shadow: 0 -4px 11px -4px var(--shadow-color);
     display: flex;
     flex-direction: column;
     height: var(--vh);
@@ -8,14 +9,9 @@
     transition: top .5s ease-out;
     width: 100vw;
     z-index: 2000;
-    box-shadow: 0 -4px 11px -4px var(--shadow-color);
 
     &.up {
         top: calc(100vh - (var(--vh)));
-
-        &:before{
-            content: calc(100vh - (var(--vh)));
-        }
 
         .waypoints {
             flex-grow: 1;
