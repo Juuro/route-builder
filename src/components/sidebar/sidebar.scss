@@ -11,13 +11,7 @@
     z-index: 2000;
 
     &.up {
-        top: 0;
-
-        .waypoints {
-            flex-grow: 1;
-            margin-bottom: 1rem;
-            overflow: scroll;
-        }        
+        top: 0;      
     }
 
     &.down {
@@ -36,10 +30,17 @@
         }
     }
 
+    .waypoints {
+        flex-grow: 1;
+        margin-bottom: 1rem;
+        overflow: scroll;
+    }  
+
     .sidebar-position-toggle {
         cursor: pointer;
         display: flex;
         justify-content: center;
+        user-select: none;
 
         .sidebar-position-toggle-icon {
             height: 2rem;
