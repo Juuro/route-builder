@@ -59,14 +59,26 @@ describe('reducer', () => {
     })
 
     it('with action type ADD_MAP should add the map to the store', () => {
-        const newMap = {this: 'is the map object'}
-        const action = {type: 'ADD_MAP', payload: newMap}
+        const map = {this: 'is the map object'}
+        const action = {type: 'ADD_MAP', payload: map}
 
         const newState = reducer(INITIAL_STORE, action)
 
         expect(newState).toEqual({
             ...INITIAL_STORE,
-            map: newMap,
+            map,
+        })
+    })
+
+    it('with action type ADD_DRAG_WAYPOINT should add the map to the store', () => {
+        const dragWaypoint = {id: 2, this: 'is the waypoint that is dragged'}
+        const action = {type: 'ADD_DRAG_WAYPOINT', payload: dragWaypoint}
+
+        const newState = reducer(INITIAL_STORE, action)
+
+        expect(newState).toEqual({
+            ...INITIAL_STORE,
+            dragWaypoint,
         })
     })
 

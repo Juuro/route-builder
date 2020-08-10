@@ -19,6 +19,9 @@ const reducer = (state = initialState, action) => {
         case 'ADD_MAP': {
             return {...state, map: action.payload}
         }
+        case 'ADD_DRAG_WAYPOINT': {
+            return {...state, dragWaypoint: action.payload}
+        }
         default: {
             return state
         }
