@@ -8,7 +8,7 @@ import Waypoint from '../waypoint/waypoint'
 
 const Sidebar = () => {
     const dispatch = useDispatch()
-    const [dragEl, setDragEl] = useState(null)
+    const [dragWaypoint, setDragWaypoint] = useState(null)
 
     const markers = useSelector(state => state.markers)
 
@@ -18,13 +18,13 @@ const Sidebar = () => {
         return markerIds(newMarkers).toString() !== markerIds(markers).toString()
     }
 
-    const moveWaypoint = el => {
-        const itemIndex = markers.findIndex(marker => marker.id === dragEl.id)
-        const hoverIndex = markers.findIndex(marker => marker.id === el)
+    const moveWaypoint = hoverWaypointId => {
+        const dragItemIndex = markers.findIndex(marker => marker.id === dragWaypoint.id)
+        const hoverItemIndex = markers.findIndex(marker => marker.id === hoverWaypointId)
         const newMarkers = [...markers]
 
-        newMarkers.splice(itemIndex, 1)
-        newMarkers.splice(hoverIndex, 0, dragEl)
+        newMarkers.splice(dragItemIndex, 1)
+        newMarkers.splice(hoverItemIndex, 0, dragWaypoint)
 
         if (hasMarkerOrderChanged(newMarkers)) {
             dispatch({type: 'REPLACE_MARKERS', payload: newMarkers})
@@ -32,7 +32,7 @@ const Sidebar = () => {
     }
 
     const setDragElement = el => {
-        setDragEl(el)
+        setDragWaypoint(el)
     }
 
     return (

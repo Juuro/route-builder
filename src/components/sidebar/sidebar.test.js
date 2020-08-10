@@ -30,10 +30,10 @@ describe('Sidebar', () => {
 
     const SidebarComponent = () => <Provider store={store}><Sidebar /></Provider>
 
-    describe('move waypoint', () => {
+    describe('Waypoint', () => {
         jest.useFakeTimers()
 
-        it('move dat waypint', () => {
+        it('should drag waypoint if it gets moved', () => {
             store.getState().markers = markers
             const component = mount(<SidebarComponent />)
             const waypoint = component.find('.waypoint').first()
