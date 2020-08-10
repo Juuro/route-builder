@@ -8,6 +8,16 @@ import './index.scss'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
+// eslint-disable-next-line no-magic-numbers
+let viewHeight = window.innerHeight
+document.documentElement.style.setProperty('--vh', `${viewHeight}px`)
+
+window.addEventListener('resize', () => {
+    // eslint-disable-next-line no-magic-numbers
+    viewHeight = window.innerHeight
+    document.documentElement.style.setProperty('--vh', `${viewHeight}px`)
+})
+
 ReactDOM.render(<Provider store={store}>
     <App />
 </Provider>, document.getElementById('root'))
