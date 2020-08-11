@@ -35,7 +35,8 @@
     .waypoints {
         flex-grow: 1;
         margin-bottom: 1rem;
-        overflow: scroll;
+        overflow-x: hidden;
+        overflow-y: scroll;
     }  
 
     .sidebar-position-toggle {
