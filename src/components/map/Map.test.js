@@ -38,7 +38,7 @@ describe('Map', () => {
     })
 
     describe('Leaflet map click', () => {
-        it('should initialise map with markes', () => {
+        it('should create new marker if thre are already some markers', () => {
             store.getState().markers = markers
             const MapComponent = () => <Provider store={store}><Map /></Provider>
             mount(<MapComponent />)
@@ -55,10 +55,10 @@ describe('Map', () => {
             expect(marker.id).toEqual(5)
         })
 
-        it('should initialise map without markes', () => {
+        it('should create new marker if thre are no markers yet', () => {
             store.getState().markers = []
             const MapComponent = () => <Provider store={store}><Map /></Provider>
-            const component = mount(<MapComponent />)
+            mount(<MapComponent />)
             const [{payload: map}] = store.getActions()
 
             act(() => {
@@ -69,27 +69,25 @@ describe('Map', () => {
             const [, {payload: marker}] = store.getActions()
             expect(actionType).toEqual('ADD_MARKERS')
             expect(marker.id).toEqual(1)
-            expect(component.html()).toContain('left: -366px; top: -251px;')
         })
     })
 
     describe('Leaflet marker move', () => {
-        it('should set newMArkerPosition', () => {
+        it('should set newMarkerPosition', () => {
             store.getState().markers = []
             const MapComponent = () => <Provider store={store}><Map /></Provider>
             const component = mount(<MapComponent />)
             const [{payload: map}] = store.getActions()
             act(() => {
-                // map.fireEvent('click', {latlng: {lat: 48.765432, lng: 11.987654}})
-                map.fireEvent('click', {latlng: {lat: 34.765432, lng: 5.987654}})
+                map.fireEvent('click', {latlng: {lat: 46.378333, lng: 13.836667}})
             })
             const [, {payload: marker}] = store.getActions()
 
             act(() => {
-                marker.marker.fireEvent('move', {latlng: {lat: 34.765432, lng: 5.987654}})
+                marker.marker.fireEvent('move', {latlng: {lat: 48.378333, lng: 12.836667}})
             })
 
-            expect(component.html()).toContain('left: -366px; top: -251px;')
+            expect(component.html()).toContain('left: 0px; top: 0px;')
         })
     })
 
