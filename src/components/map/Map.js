@@ -17,7 +17,7 @@ const Map = () => {
     const [newMarker, setNewMarker] = useState(null)
     const [newMarkerPosition, setNewMarkerPosition] = useState(null)
 
-    const geoFindMe =() => {
+    const getGeolocation = () => {
         const success = position => {
             const {latitude} = position.coords
             const {longitude} = position.coords
@@ -53,7 +53,7 @@ const Map = () => {
         }
 
         map.current = Leaflet.map(mapElement.current)
-        geoFindMe()
+        getGeolocation()
         dispatch({type: 'ADD_MAP', payload: map.current})
 
         Leaflet.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
