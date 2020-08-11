@@ -34,7 +34,7 @@ const Sidebar = () => {
         }
     }
 
-    const setDragElement = el => {
+    const setDragWaypoint = el => {
         dispatch({type: 'ADD_DRAG_WAYPOINT', payload: el})
     }
 
@@ -60,7 +60,7 @@ const Sidebar = () => {
                         key={marker.id}
                         waypoint={marker}
                         moveWaypoint={moveWaypoint}
-                        setDragElement={setDragElement}
+                        setDragWaypoint={setDragWaypoint}
                     />
                 ))}
             </div>
