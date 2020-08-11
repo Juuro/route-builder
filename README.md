@@ -1,5 +1,5 @@
 ## What I have learned
-Despite the outcome of my application I have to say I already gained valuable insights from this challenge. I worked with several Browser APIs and tools I never worked with or never did so in this extent.
+Despite the outcome of my application I have to say I already gained valuable insights from this challenge. Here is what I learned:
 
 Before this challenge I never worked with maps. Although I have a side project where I collect locations of concert venues I never finished my plan to show them on a map in the app. I saw that the komoot app uses Leaflet so I also went for it. It was pretty straight forward and I had my first map after a couple of minutes. I was tempted to try out all the things you can do with Leaflet. Especially popups to be able to delete a marker on the map directly seemed to make sense in this case. But I sticked to the screenshot to stay in scope of the challenge.
 
@@ -8,6 +8,8 @@ Especially interesting to me was the Geolocation API. I know this was not in the
 I also never worked with the Drag and Drop API. It took me a while to get it dialed and look nice without any flickering in the different states. But the bigger challenge here was writing tests for it. I never simulated a drag somehow. But in the end I got it all tested.
 
 Although we used Content Security Policies in all of our apps in my current job, I never set it up from the ground up. I was surprised how easy it could be done and now I ask myself why it is not used more often.
+
+I worked with several Browser APIs and tools I never worked with or never did so in this extent. I already have many ideas where I could use some of those APIs and tools in my side projects.
 
 ## Available Scripts
 
