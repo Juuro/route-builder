@@ -1,4 +1,4 @@
-## What I have learned
+# What I have learned
 Despite the outcome of my application I have to say I already gained valuable insights from this challenge. Here is what I learned:
 
 Before this challenge I never worked with maps. Although I have a side project where I collect locations of concert venues I never finished my plan to show them on a map in the app. I saw that the komoot app uses Leaflet so I also went for it. It was pretty straight forward and I had my first map after a couple of minutes. I was tempted to try out all the things you can do with Leaflet. Especially popups to be able to delete a marker on the map directly seemed to make sense in this case. But I sticked to the screenshot to stay in scope of the challenge.
@@ -14,8 +14,6 @@ I had to create a mobile style for this app. I think smaller screensizes and tou
 I worked with several Browser APIs and tools I never worked with or never did so in this extent. I already have many ideas where I could use some of those APIs and tools in my side projects.
 
 ## Available Scripts
-
-In the project directory, you can run:
 
 ### `yarn start`
 
