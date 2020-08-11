@@ -5,7 +5,7 @@
     {
       "src": "/icons/favicon.ico",
       "sizes": "32x32",
-      "type": "image/x-icon"
+      "type": "image/png"
     },
     {
       "src": "/icons/icon-72x72.png",
