@@ -4,7 +4,7 @@ import {mount} from 'enzyme'
 import configureStore from 'redux-mock-store'
 import {act} from 'react-dom/test-utils'
 
-import Map from './map'
+import Map from './Map'
 
 describe('Map', () => {
     let store = {}

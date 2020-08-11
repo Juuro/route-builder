@@ -6,7 +6,7 @@ import {scrollBehaviourDragImageTranslateOverride} from 'mobile-drag-drop/scroll
 
 import {ReactComponent as DeleteIcon} from './delete.svg'
 
-import './waypoint.scss'
+import './Waypoint.scss'
 
 const Waypoint = ({waypoint, moveWaypoint, setDragElement}) => {
     polyfill({dragImageTranslateOverride: scrollBehaviourDragImageTranslateOverride})

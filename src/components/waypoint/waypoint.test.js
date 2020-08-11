@@ -3,7 +3,7 @@ import {Provider} from 'react-redux'
 import {mount} from 'enzyme'
 import configureStore from 'redux-mock-store'
 
-import Waypoint from './waypoint'
+import Waypoint from './Waypoint'
 
 describe('Waypoint', () => {
     let store = {}
