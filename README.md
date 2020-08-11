@@ -11,6 +11,8 @@ I also played around with the Geolocation API, but it didn't end up in the app e
 
 I had to create a mobile style for this app. I think that smaller screen sizes and touch devices make up such a large part of the web that any web application should work on them. For this kind of app I think a PWA makes sense if there are no native mobile apps so I enabled it and configured it in the manifest.json.
 
+Apart from the technical things, I have learned that I can do a lot in a short time if it is important enough to me.
+
 Now I have so many ideas where I could use some of those APIs and tools in my side projects.
 
 ## Available Scripts
