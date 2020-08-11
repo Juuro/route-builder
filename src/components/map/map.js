@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import Leaflet from 'leaflet'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import mapboxgl from 'mapbox-gl'
 import {} from 'mapbox-gl-leaflet'
 import 'leaflet/dist/leaflet.css'
 
