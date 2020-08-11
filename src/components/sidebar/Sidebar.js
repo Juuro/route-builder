@@ -58,7 +58,6 @@ const Sidebar = () => {
                 {markers.map(marker => (
                     <Waypoint
                         key={marker.id}
-                        id={marker.id}
                         waypoint={marker}
                         moveWaypoint={moveWaypoint}
                         setDragElement={setDragElement}
