@@ -1,10 +1,12 @@
+@import 'styles/mixins';
+
 main {
     display: flex;
     flex: 1;
     flex-direction: column;
 }
 
-@media (min-width: 768px) {
+@include breakpoint-medium-up() {
     main {
         flex-direction: row;
     }

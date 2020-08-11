@@ -1,3 +1,5 @@
+@import '../../styles/mixins';
+
 .sidebar {
     background-color: var(--almost-black);
     box-shadow: 0 -4px 11px -4px var(--shadow-color);
@@ -68,7 +70,7 @@ button {
     flex-shrink: 0;
 }
 
-@media (min-width: 768px) {
+@include breakpoint-medium-up() {
     .sidebar {
         display: flex;
         flex: 0 0 388px;
