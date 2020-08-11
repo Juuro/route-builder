@@ -1,8 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-
-import 'leaflet/dist/leaflet.css'
 import Leaflet from 'leaflet'
+import 'mapbox-gl/dist/mapbox-gl.css'
+import mapboxgl from 'mapbox-gl'
+import {} from 'mapbox-gl-leaflet'
+import 'leaflet/dist/leaflet.css'
 
 import './map.scss'
 
@@ -32,16 +34,11 @@ const Map = () => {
 
         // eslint-disable-next-line no-magic-numbers
         map.current = Leaflet.map(mapElement.current).setView([46.378333, 13.836667], 12)
-        dispatch({type: 'ADD_MAP', payload: map.current})
-
-        Leaflet.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox/outdoors-v11',
-            tileSize: 512,
-            zoomOffset: -1,
+        Leaflet.mapboxGL({
             accessToken: 'pk.eyJ1IjoianV1cm8iLCJhIjoiY2tkaGdoNzk0MDJ1YTJzb2V4anZ3NXk4bSJ9.1m7LQQaTf2W4R-IgKKGZCQ',
+            style: 'mapbox://styles/mapbox/outdoors-v11',
         }).addTo(map.current)
+        dispatch({type: 'ADD_MAP', payload: map.current})
 
         map.current.on('click', onMapClick)
     }, [dispatch])
@@ -79,9 +76,7 @@ const Map = () => {
             newCoordinates.push([latlng.lat, latlng.lng])
         })
 
-        path.current = Leaflet.polyline(newCoordinates, {color: '#4085E1', weight: 8})
-
-        path.current.addTo(map.current)
+        path.current = Leaflet.polyline(newCoordinates, {color: '#4085E1', weight: 8}).addTo(map.current)
 
         return () => {
             setNewMarkerPosition(null)
