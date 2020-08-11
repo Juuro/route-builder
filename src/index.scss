@@ -15,6 +15,10 @@ body {
     overflow: hidden;
 }
 
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
 .button-no-button {
     background-color: transparent;
     border: 0;
