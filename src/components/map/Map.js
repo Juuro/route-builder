@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import 'leaflet/dist/leaflet.css'
 import Leaflet from 'leaflet'
 
-import './map.scss'
+import './Map.scss'
 
 const Map = () => {
     const dispatch = useDispatch()

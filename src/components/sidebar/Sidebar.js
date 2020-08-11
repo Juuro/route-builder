@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
-import Waypoint from '../waypoint/waypoint'
+import Waypoint from '../waypoint/Waypoint'
 import DownloadGPXButton from '../downloadGPXButton/DownloadGPXButton'
 import {ReactComponent as ArrowIcon} from './arrow.svg'
 
-import './sidebar.scss'
+import './Sidebar.scss'
 
 const Sidebar = () => {
     const dispatch = useDispatch()

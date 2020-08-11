@@ -4,7 +4,7 @@ import {mount} from 'enzyme'
 import configureStore from 'redux-mock-store'
 import {act} from 'react-dom/test-utils'
 
-import Sidebar from './sidebar'
+import Sidebar from './Sidebar'
 
 describe('Sidebar', () => {
     URL.createObjectURL = jest.fn()
