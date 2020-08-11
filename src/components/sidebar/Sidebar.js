@@ -49,7 +49,7 @@ const Sidebar = () => {
 
     return (
         <aside className={`sidebar ${sidebarPosition}`}>
-            <button className="sidebar-position-toggle button-no-button" onClick={toggleUpDown} title="Click to see all waypoints as a list">
+            <button type="button" className="sidebar-position-toggle button-no-button" onClick={toggleUpDown} title="Click to see all waypoints as a list">
                 <ArrowIcon className="sidebar-position-toggle-icon" />
             </button>
             <h1>Route Builder</h1>
