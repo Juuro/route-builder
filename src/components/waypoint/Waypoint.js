@@ -8,7 +8,7 @@ import {ReactComponent as DeleteIcon} from './delete.svg'
 
 import './Waypoint.scss'
 
-const Waypoint = ({waypoint, moveWaypoint, setDragElement}) => {
+const Waypoint = ({waypoint, moveWaypoint, setDragWaypoint}) => {
     polyfill({dragImageTranslateOverride: scrollBehaviourDragImageTranslateOverride})
 
     const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement}) => {
     }
 
     const onDragStart = ({target}) => {
-        setDragElement(waypoint)
+        setDragWaypoint(waypoint)
         setTimeout(() => {
             target.style.opacity = 0.2
             target.classList.add('dragging')
@@ -66,7 +66,7 @@ const Waypoint = ({waypoint, moveWaypoint, setDragElement}) => {
 Waypoint.propTypes = {
     waypoint: PropTypes.object.isRequired,
     moveWaypoint: PropTypes.func.isRequired,
-    setDragElement: PropTypes.func.isRequired,
+    setDragWaypoint: PropTypes.func.isRequired,
 }
 
 export default Waypoint
