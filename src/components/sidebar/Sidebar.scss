@@ -80,6 +80,10 @@ button {
         position: static;
         width: auto;
 
+        &.down {
+            border-radius: 0;
+        }
+
         .sidebar-position-toggle {
             display: none;
         }
