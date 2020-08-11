@@ -55,11 +55,11 @@ const Sidebar = () => {
             <h1>Route Builder</h1>
             <hr />
             <div className="waypoints">
-                {markers.map(waypoint => (
+                {markers.map(marker => (
                     <Waypoint
-                        key={waypoint.id}
-                        id={waypoint.id}
-                        waypoint={waypoint}
+                        key={marker.id}
+                        id={marker.id}
+                        waypoint={marker}
                         moveWaypoint={moveWaypoint}
                         setDragElement={setDragElement}
                     />
