@@ -17,6 +17,28 @@ const Map = () => {
     const [newMarker, setNewMarker] = useState(null)
     const [newMarkerPosition, setNewMarkerPosition] = useState(null)
 
+    const getGeolocation = () => {
+        const success = position => {
+            const {latitude} = position.coords
+            const {longitude} = position.coords
+
+            // eslint-disable-next-line no-magic-numbers
+            map.current.setView([latitude, longitude], 12)
+        }
+
+        const error = () => {
+            // eslint-disable-next-line no-magic-numbers
+            map.current.setView([46.378333, 13.836667], 12)
+        }
+
+        if (!navigator.geolocation) {
+            // eslint-disable-next-line no-magic-numbers
+            map.current.setView([46.378333, 13.836667], 12)
+        } else {
+            navigator.geolocation.getCurrentPosition(success, error)
+        }
+    }
+
     useEffect(() => {
         const onMarkerMove = event => {
             setNewMarkerPosition(event.latlng)
@@ -30,8 +52,8 @@ const Map = () => {
             setNewMarker(marker)
         }
 
-        // eslint-disable-next-line no-magic-numbers
-        map.current = Leaflet.map(mapElement.current).setView([46.378333, 13.836667], 12)
+        map.current = Leaflet.map(mapElement.current)
+        getGeolocation()
         dispatch({type: 'ADD_MAP', payload: map.current})
 
         Leaflet.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
