@@ -18,6 +18,7 @@ Now I have so many ideas where I could use some of those APIs and tools in my si
 ### `yarn start`
 
 Runs the app in the development mode.<br />
+When the borswer asks for permission to use your location you should decline, because Geolocation API will only work with https in most browsers.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `yarn test`
