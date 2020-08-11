@@ -3,7 +3,6 @@ import {Provider} from 'react-redux'
 import {mount} from 'enzyme'
 import configureStore from 'redux-mock-store'
 import {act} from 'react-dom/test-utils'
-import mockGeolocation from 'mock-geolocation'
 
 import Map from './Map'
 
@@ -36,44 +35,6 @@ describe('Map', () => {
             const [{type: actionType}] = store.getActions()
             expect(actionType).toEqual('ADD_MAP')
         })
-
-        it('should initialise map without geolocation available', () => {
-            global.navigator = {}
-            const MapComponent = () => <Provider store={store}><Map /></Provider>
-
-            mount(<MapComponent />)
-
-            const [{payload: actionPayload}] = store.getActions()
-            expect(actionPayload.getCenter()).toEqual({lat: 46.378333, lng: 13.836667})
-        })
-
-        it('should initialise map with geolocation', () => {
-            mockGeolocation.use()
-            const MapComponent = () => <Provider store={store}><Map /></Provider>
-
-            mount(<MapComponent />)
-            mockGeolocation.send({
-                latitude: 50,
-                longitude: 10,
-                accuracy: 5,
-                timestamp: 3000,
-            })
-
-            const [{payload: actionPayload}] = store.getActions()
-            expect(actionPayload.getCenter()).toEqual({lat: 50, lng: 10})
-        })
-
-        it('should initialise map with geolocation error', () => {
-            mockGeolocation.use()
-            const MapComponent = () => <Provider store={store}><Map /></Provider>
-
-            mount(<MapComponent />)
-            mockGeolocation.sendError()
-
-            const [{payload: actionPayload}] = store.getActions()
-            expect(actionPayload.getCenter()).toEqual({lat: 46.378333, lng: 13.836667})
-        })
-
     })
 
     describe('Leaflet map click', () => {
