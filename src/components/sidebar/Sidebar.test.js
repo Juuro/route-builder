@@ -2,7 +2,6 @@ import React from 'react'
 import {Provider} from 'react-redux'
 import {mount} from 'enzyme'
 import configureStore from 'redux-mock-store'
-import {act} from 'react-dom/test-utils'
 
 import Sidebar from './Sidebar'
 
