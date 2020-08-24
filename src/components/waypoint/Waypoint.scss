@@ -4,11 +4,13 @@
     display: flex;
     flex-direction: row;
     margin: 1rem 0;
+    opacity: 1;
     padding: .25rem;
     transition: background-color .5s ease-out;
 
     &.dragging {
         background-color: var(--white);
+        opacity: .2;
 
         .waypoint-drag-handle,
         .delete-icon {

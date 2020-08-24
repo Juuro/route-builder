@@ -21,10 +21,7 @@ const Waypoint = ({waypoint, moveWaypoint, setDragWaypoint}) => {
 
     const onDragStart = ({target}) => {
         setDragWaypoint(waypoint)
-        setTimeout(() => {
-            target.style.opacity = 0.2
-            target.classList.add('dragging')
-        }, 1)
+        target.classList.add('dragging')
     }
 
     const onDragOver = waypointId => event => {
@@ -33,7 +30,6 @@ const Waypoint = ({waypoint, moveWaypoint, setDragWaypoint}) => {
     }
 
     const onDragEnd = ({target}) => {
-        target.style.opacity = 1
         target.classList.remove('dragging')
     }
 

@@ -40,9 +40,6 @@ describe('Sidebar', () => {
             const waypoint = component.find('.waypoint').first()
             waypoint.simulate('dragstart')
             waypoint.simulate('dragenter')
-            act(() => {
-                jest.runOnlyPendingTimers()
-            })
 
             expect(waypoint.html()).toContain('dragging')
 
@@ -65,9 +62,6 @@ describe('Sidebar', () => {
             const waypoint = component.find('.waypoint').first()
             waypoint.simulate('dragstart')
             waypoint.simulate('dragenter')
-            act(() => {
-                jest.runOnlyPendingTimers()
-            })
 
             expect(waypoint.html()).toContain('dragging')
 

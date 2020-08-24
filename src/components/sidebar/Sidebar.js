@@ -16,7 +16,7 @@ const Sidebar = () => {
     const dragWaypoint = useSelector(state => state.dragWaypoint)
 
     const hasMarkerOrderChanged = newMarkers => {
-        const markerIds = markersArray => markersArray.map(marker => marker[Object.keys(marker)[0]])
+        const markerIds = markersArray => markersArray.map(marker => marker.id)
 
         return markerIds(newMarkers).toString() !== markerIds(markers).toString()
     }

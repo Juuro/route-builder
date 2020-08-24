@@ -45,7 +45,7 @@ const Map = () => {
 
         map.current.on('click', onMapClick)
     }, [dispatch])
-
+    
     useEffect(() => {
         const calculateMarkerId = () => {
             let maximum = 1
@@ -89,9 +89,7 @@ const Map = () => {
     }, [markers, newMarkerPosition])
 
     return (
-        <>
-            <div className="mapid" ref={mapElement}></div>
-        </>
+        <div className="mapid" ref={mapElement}></div>
     )
 }
 
