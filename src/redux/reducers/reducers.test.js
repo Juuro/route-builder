@@ -70,18 +70,6 @@ describe('reducer', () => {
         })
     })
 
-    it('with action type ADD_DRAG_WAYPOINT should add the map to the store', () => {
-        const dragWaypoint = {id: 2, this: 'is the waypoint that is dragged'}
-        const action = {type: 'ADD_DRAG_WAYPOINT', payload: dragWaypoint}
-
-        const newState = reducer(INITIAL_STORE, action)
-
-        expect(newState).toEqual({
-            ...INITIAL_STORE,
-            dragWaypoint,
-        })
-    })
-
     it('with no state and unknown action should return the initial state', () => {
         const action = {type: 'UNKNOWN'}
 
