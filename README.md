@@ -1,3 +1,5 @@
+**Note:** I did this project during the process of applying for the position of  React Developer at Komoot in 2020. It was the most intense thing I did to date and I can recommend it to everyone to do a programming excercise like this. I learnt so much about React.
+
 # What I have learned
 Despite the outcome of my application I have to say I already gained valuable insights from this challenge. Here is what I've learned:
 
