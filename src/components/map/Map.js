@@ -7,6 +7,7 @@ import Leaflet from 'leaflet'
 import './Map.scss'
 
 const Map = () => {
+    console.log('render Map')
     const dispatch = useDispatch()
 
     const map = useRef(null)
@@ -18,6 +19,7 @@ const Map = () => {
     const [newMarkerPosition, setNewMarkerPosition] = useState(null)
 
     useEffect(() => {
+        console.log('useEffect init Map')
         const onMarkerMove = event => {
             setNewMarkerPosition(event.latlng)
         }
@@ -47,6 +49,7 @@ const Map = () => {
     }, [dispatch])
 
     useEffect(() => {
+        console.log('useEffect new Marker')
         const calculateMarkerId = () => {
             let maximum = 1
             if (markers.length !== 0) {
@@ -71,6 +74,7 @@ const Map = () => {
     }, [newMarker, markers, dispatch])
 
     useEffect(() => {
+        console.log('useEffect new MarkerPosition')
         map.current.removeLayer(path.current)
 
         const newCoordinates = []
@@ -89,9 +93,7 @@ const Map = () => {
     }, [markers, newMarkerPosition])
 
     return (
-        <>
-            <div className="mapid" ref={mapElement}></div>
-        </>
+        <div className="mapid" ref={mapElement}></div>
     )
 }
 

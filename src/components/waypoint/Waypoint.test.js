@@ -21,7 +21,7 @@ describe('Waypoint', () => {
         jest.clearAllMocks()
     })
 
-    const WaypointComponent = () => <Provider store={store}><Waypoint waypoint={marker} moveWaypoint={jest.fn()} setDragElement={jest.fn()} /></Provider>
+    const WaypointComponent = () => <Provider store={store}><Waypoint waypoint={marker} moveWaypoint={jest.fn()} setDragWaypoint={jest.fn()} /></Provider>
 
     describe('remove waypoint', () => {
         it('remove', () => {

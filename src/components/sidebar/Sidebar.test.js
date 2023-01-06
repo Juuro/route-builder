@@ -2,7 +2,6 @@ import React from 'react'
 import {Provider} from 'react-redux'
 import {mount} from 'enzyme'
 import configureStore from 'redux-mock-store'
-import {act} from 'react-dom/test-utils'
 
 import Sidebar from './Sidebar'
 
@@ -40,21 +39,15 @@ describe('Sidebar', () => {
             const waypoint = component.find('.waypoint').first()
             waypoint.simulate('dragstart')
             waypoint.simulate('dragenter')
-            act(() => {
-                jest.runOnlyPendingTimers()
-            })
 
             expect(waypoint.html()).toContain('dragging')
-
-            const [{type: addDragWaypointActionType}] = store.getActions()
-            expect(addDragWaypointActionType).toEqual('ADD_DRAG_WAYPOINT')
 
             waypoint.simulate('dragover')
             waypoint.simulate('dragend')
 
             expect(waypoint.html()).not.toContain('dragging')
 
-            const [, {type: replaceMarkersActionType}] = store.getActions()
+            const [{type: replaceMarkersActionType}] = store.getActions()
             expect(replaceMarkersActionType).toEqual('REPLACE_MARKERS')
         })
 
@@ -65,20 +58,14 @@ describe('Sidebar', () => {
             const waypoint = component.find('.waypoint').first()
             waypoint.simulate('dragstart')
             waypoint.simulate('dragenter')
-            act(() => {
-                jest.runOnlyPendingTimers()
-            })
 
             expect(waypoint.html()).toContain('dragging')
-
-            const [{type: addDragWaypointActionType}] = store.getActions()
-            expect(addDragWaypointActionType).toEqual('ADD_DRAG_WAYPOINT')
 
             waypoint.simulate('dragover')
             waypoint.simulate('dragend')
 
             expect(waypoint.html()).not.toContain('dragging')
-            expect(store.getActions()[1]).toBeUndefined()
+            expect(store.getActions()[0]).toBeUndefined()
         })
     })
 
